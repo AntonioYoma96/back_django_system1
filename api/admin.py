@@ -1,3 +1,41 @@
 from django.contrib import admin
 
-# Register your models here.
+from api.models_dir import *
+
+admin.site.register(Colaborador)
+admin.site.register(Sexo)
+admin.site.register(EstadoCivil)
+admin.site.register(Nacionalidad)
+admin.site.register(Comuna)
+admin.site.register(Provincia)
+admin.site.register(Region)
+admin.site.register(Hijo)
+admin.site.register(PersonaContacto)
+admin.site.register(ColaboradorSkill)
+admin.site.register(Skill)
+admin.site.register(NivelSkill)
+
+admin.site.register(DatosContractuales)
+admin.site.register(TipoContrato)
+admin.site.register(PrevisionAfp)
+admin.site.register(PrevisionSalud)
+admin.site.register(Banco)
+admin.site.register(TipoCuenta)
+
+admin.site.register(DatosFormacion)
+admin.site.register(TipoFormacion)
+admin.site.register(Carrera)
+admin.site.register(EstadoFormacion)
+admin.site.register(Institucion)
+admin.site.register(TipoInstitucion)
+admin.site.register(OtroFormacion)
+admin.site.register(TipoOtroFormacion)
+admin.site.register(Diploma)
+
+admin.site.register(DatosOrganizacionales)
+admin.site.register(Empleador)
+admin.site.register(Cargo)
+admin.site.register(Unidad)
+admin.site.register(AreaFuncional)
+admin.site.register(NivelResponsabilidad)
+admin.site.register(CentroCosto)
