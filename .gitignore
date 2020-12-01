@@ -413,5 +413,5 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,python,virtualenv,django,sublimetext,visualstudiocode,pycharm+all,git
 
-# Aditional files
+# Aditional files (It's just while testing. In the future can change)
 migrations/
