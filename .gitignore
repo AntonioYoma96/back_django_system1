@@ -415,3 +415,7 @@ $RECYCLE.BIN/
 
 # Aditional files (It's just while testing. In the future can change)
 migrations/
+
+# Sphinx docs
+docs/_build
+docs/*.rst
