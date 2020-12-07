@@ -35,7 +35,6 @@ lista_modelos = [
     Diploma,
     # Organización
     DatosOrganizacionales,
-    Empleador,
     Cargo,
     Unidad,
     AreaFuncional,
@@ -46,6 +45,19 @@ lista_modelos = [
     DatosActividad,
     Proyecto,
     Cliente,
+    MesaAyuda,
+    TipoSoporte,
+    Modulo,
+    # Ticket
+    Ticket,
+    Prioridad,
+    TipoTicket,
+    EstadoTicket,
+    ImagenTicket,
+    Mensaje,
+    ImagenMensaje,
+    Etiqueta,
+    Origen,
 ]
 
 for modelo in lista_modelos:

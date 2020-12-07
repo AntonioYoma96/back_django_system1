@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 from django.db import models
+from field_history.tracker import FieldHistoryTracker
 
 
 def get_image_ticket_path(instance, filename):
@@ -49,6 +50,8 @@ class Ticket(models.Model):
     estado_ticket = models.ForeignKey('EstadoTicket', on_delete=models.CASCADE, verbose_name='estado del ticket')
     created = models.DateTimeField('creado', auto_now_add=True)
     modified = models.DateTimeField('modificado', auto_now=True)
+
+    historial = FieldHistoryTracker(['asignado', 'estado_ticket'])
 
     def __str__(self):
         return f'{self.id} - {self.asunto[:50]} - {self.estado_ticket.nombre}'

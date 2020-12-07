@@ -8,6 +8,7 @@ django = "*"
 psycopg2 = "*"
 django-environ = "*"
 pillow = "*"
+django-field-history = "*"
 
 [dev-packages]
 

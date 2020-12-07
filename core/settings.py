@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     # Project apps
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
+    # 3rd party apps
+    'field_history',
 ]
 
 MIDDLEWARE = [
