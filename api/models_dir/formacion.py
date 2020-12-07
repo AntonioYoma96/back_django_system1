@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -51,7 +52,11 @@ class EstadoFormacion(models.Model):
 
 
 class Institucion(models.Model):
-    tipo_institucion = models.ForeignKey('TipoInstitucion', on_delete=models.CASCADE, verbose_name='tipo de institución')
+    tipo_institucion = models.ForeignKey(
+        'TipoInstitucion',
+        on_delete=models.CASCADE,
+        verbose_name='tipo de institución'
+    )
     nombre = models.CharField(max_length=100, unique=True)
 
     class Meta:
@@ -67,7 +72,7 @@ class TipoInstitucion(models.Model):
 
     class Meta:
         verbose_name = 'tipo de institución'
-        verbose_name_plural = 'tipos de institución'
+        verbose_name_plural = 'tipos de instituciones'
 
     def __str__(self):
         return self.nombre
@@ -82,10 +87,10 @@ class OtroFormacion(models.Model):
         verbose_name='tipo otro de formación'
     )
     diploma = models.ForeignKey('Diploma', on_delete=models.CASCADE)
-    horas = models.PositiveSmallIntegerField()
+    horas = models.DecimalField(max_digits=6, decimal_places=1, validators=[MinValueValidator(0.0)])
 
     def __str__(self):
-        return f'{self.diploma.nombre} - {self.horas} hora{"s" if self.horas != 1 else ""}'
+        return f'{self.diploma.nombre} - {self.horas} hora{"s" if self.horas != 1.0 else ""}'
 
 
 class TipoOtroFormacion(models.Model):

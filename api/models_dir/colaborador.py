@@ -21,6 +21,9 @@ class Colaborador(models.Model):
     telefono_fijo = models.CharField('teléfono fijo', max_length=20, blank=True, null=True)
     telefono_movil = models.CharField('teléfono móvil', max_length=20, blank=True, null=True)
     email_personal = models.EmailField()
+    fecha_ingreso = models.DateField('fecha de ingreso')
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = 'colaboradores'
@@ -50,7 +53,7 @@ class EstadoCivil(models.Model):
 
 
 class Nacionalidad(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, unique=True)
 
     class Meta:
         verbose_name_plural = 'nacionalidades'
@@ -94,7 +97,7 @@ class Hijo(models.Model):
     nombres = models.CharField(max_length=100)
     apellido_paterno = models.CharField(max_length=100)
     apellido_materno = models.CharField(max_length=100, blank=True, null=False)
-    RUN = models.CharField('RUN', max_length=100, unique=True, validators=[validate_run])
+    RUN = models.CharField('RUN', max_length=11, blank=True, null=True, unique=True, validators=[validate_run])
     fecha_nacimiento = models.DateField('fecha de nacimiento')
 
     def __str__(self):
@@ -146,7 +149,7 @@ class NivelSkill(models.Model):
 
     class Meta:
         verbose_name = 'nivel de skill'
-        verbose_name_plural = 'niveles de skill'
+        verbose_name_plural = 'niveles de skills'
 
     def __str__(self):
         return self.nombre

@@ -28,7 +28,6 @@ def new_filename(ticket_path, file):
 
 
 class Ticket(models.Model):
-    cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE)
     asignado = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_asignado')
     solicitante = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_solicitado')
     validador = models.ForeignKey(
@@ -38,10 +37,9 @@ class Ticket(models.Model):
         null=True,
         related_name='ticket_validar'
     )
-    unidad = models.ForeignKey('Unidad', on_delete=models.CASCADE)
-    # módulo
-    version = models.CharField(max_length=10, blank=True, null=True)
-    integracion = models.CharField('integración', max_length=50, blank=True, null=True)
+    origen = models.ForeignKey('Origen', on_delete=models.CASCADE)
+    modulo = models.ForeignKey('Modulo', on_delete=models.CASCADE, verbose_name='módulo')
+    version = models.CharField('versión', max_length=10, blank=True, null=True)
     prioridad = models.ForeignKey('Prioridad', on_delete=models.CASCADE)
     tipo_ticket = models.ForeignKey('TipoTicket', on_delete=models.CASCADE, verbose_name='tipo de ticket')
     fecha_limite = models.DateField('fecha límite', blank=True, null=True)
@@ -52,6 +50,9 @@ class Ticket(models.Model):
     created = models.DateTimeField('creado', auto_now_add=True)
     modified = models.DateTimeField('modificado', auto_now=True)
 
+    def __str__(self):
+        return f'{self.id} - {self.asunto[:50]} - {self.estado_ticket.nombre}'
+
 
 class Prioridad(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
@@ -60,13 +61,27 @@ class Prioridad(models.Model):
     class Meta:
         verbose_name_plural = 'prioridades'
 
+    def __str__(self):
+        return f'{self.nombre} - {self.valor}'
+
 
 class TipoTicket(models.Model):
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=50, blank=True, null=True)
+    rev_min = models.PositiveSmallIntegerField('tiempo mínimo de revisión', blank=True, null=True)
+    rev_max = models.PositiveSmallIntegerField('tiempo máximo de revisión', blank=True, null=True)
+    dev_min = models.PositiveSmallIntegerField('tiempo mínimo de desarrollo', blank=True, null=True)
+    dev_mx = models.PositiveSmallIntegerField('tiempo máximo de desarrollo', blank=True, null=True)
 
     class Meta:
         verbose_name = 'tipo de ticket'
         verbose_name_plural = 'tipos de ticket'
+        constraints = [
+            models.UniqueConstraint(fields=['nombre', 'tipo'], name='unique_tipo_ticket')
+        ]
+
+    def __str__(self):
+        return f'{self.nombre} - {self.tipo}'
 
 
 class EstadoTicket(models.Model):
@@ -75,6 +90,9 @@ class EstadoTicket(models.Model):
     class Meta:
         verbose_name = 'estado del ticket'
         verbose_name_plural = 'estados del ticket'
+
+    def __str__(self):
+        return self.nombre
 
 
 class ImagenTicket(models.Model):
@@ -85,6 +103,15 @@ class ImagenTicket(models.Model):
         verbose_name = 'imagen del ticket'
         verbose_name_plural = 'imágenes de los tickets'
 
+    def __str__(self):
+        return f'{self.ticket.id} - {self.ticket.asunto[:50]} - {self.slice_path()}'
+
+    def slice_path(self):
+        return '..{}{}'.format(
+            '\\' if self.imagen[-50:][0] != '\\' else '',
+            self.imagen[-50:]
+        )
+
 
 class Mensaje(models.Model):
     ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE)
@@ -92,6 +119,9 @@ class Mensaje(models.Model):
     descripcion = models.TextField('descripción')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'Ticket: {self.ticket.id} - Mensaje: {self.asunto}'
 
 
 class ImagenMensaje(models.Model):
@@ -102,8 +132,30 @@ class ImagenMensaje(models.Model):
         verbose_name = 'imagen del mensaje'
         verbose_name_plural = 'imágenes de los mensajes'
 
+    def __str__(self):
+        return f'{self.mensaje.id} - {self.mensaje.asunto[:50]} - {self.slice_path()}'
+
+    def slice_path(self):
+        return '..{}{}'.format(
+            '\\' if self.imagen[-50:][0] != '\\' else '',
+            self.imagen[-50:]
+        )
+
 
 class Etiqueta(models.Model):
     nombre = models.CharField(max_length=50, unique=50)
     tickets = models.ManyToManyField('Ticket')
     mensajes = models.ManyToManyField('Mensaje')
+
+    def __str__(self):
+        return self.nombre
+
+
+class Origen(models.Model):
+    nombre = models.CharField(max_length=50, unique=True)
+
+    class Meta:
+        verbose_name_plural = 'orígenes'
+
+    def __str__(self):
+        return self.nombre

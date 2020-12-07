@@ -1,11 +1,9 @@
 from django.db import models
 
-from api.validators import validate_run
-
 
 class DatosOrganizacionales(models.Model):
     datos_contractuales = models.OneToOneField('DatosContractuales', on_delete=models.CASCADE)
-    empleador = models.ForeignKey('Empleador', on_delete=models.CASCADE)
+    # empleador = models.ForeignKey('Empleador', on_delete=models.CASCADE)
     cargo = models.ForeignKey('Cargo', on_delete=models.CASCADE)
     unidad = models.ForeignKey('Unidad', on_delete=models.CASCADE)
     nivel_responsabilidad = models.ForeignKey(
@@ -13,7 +11,13 @@ class DatosOrganizacionales(models.Model):
         on_delete=models.CASCADE,
         verbose_name='nivel de responsabilidad'
     )
-    jefe_directo = models.ForeignKey('Colaborador', on_delete=models.CASCADE, blank=True, null=True)
+    jefe_directo = models.ForeignKey(
+        'Colaborador',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='datos_subordinado'
+    )
     centro_costo = models.ForeignKey(
         'CentroCosto',
         on_delete=models.CASCADE,
@@ -31,15 +35,15 @@ class DatosOrganizacionales(models.Model):
         )
 
 
-class Empleador(models.Model):
-    rut = models.CharField('RUT', max_length=11, unique=True, validators=[validate_run])
-    razon_social = models.CharField('razón social', max_length=100)
-
-    class Meta:
-        verbose_name_plural = 'empleadores'
-
-    def __str__(self):
-        return self.razon_social
+# class Empleador(models.Model):
+#     rut = models.CharField('RUT', max_length=11, unique=True, validators=[validate_run])
+#     razon_social = models.CharField('razón social', max_length=100)
+#
+#     class Meta:
+#         verbose_name_plural = 'empleadores'
+#
+#     def __str__(self):
+#         return self.razon_social
 
 
 class Cargo(models.Model):
@@ -87,7 +91,7 @@ class CentroCosto(models.Model):
 
     class Meta:
         verbose_name = 'centro de costo'
-        verbose_name_plural = 'centros de costo'
+        verbose_name_plural = 'centros de costos'
 
     def __str__(self):
         return self.nombre

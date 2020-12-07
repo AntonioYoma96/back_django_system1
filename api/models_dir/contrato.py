@@ -10,9 +10,14 @@ class DatosContractuales(models.Model):
     fecha_vencimiento = models.DateField('fecha de vencimiento', blank=True, null=True)
     prevision_afp = models.ForeignKey('PrevisionAfp', on_delete=models.CASCADE, verbose_name='previsión de AFP')
     prevision_salud = models.ForeignKey('PrevisionSalud', on_delete=models.CASCADE, verbose_name='previsión de salud')
-    banco = models.ForeignKey('Banco', on_delete=models.CASCADE)
-    tipo_cuenta = models.ForeignKey('TipoCuenta', on_delete=models.CASCADE, verbose_name='tipo de cuenta')
-    numero_cuenta = models.CharField('número de cuenta', max_length=20)
+    banco = models.ForeignKey('Banco', on_delete=models.CASCADE, blank=True, null=True)
+    tipo_cuenta = models.ForeignKey(
+        'TipoCuenta',
+        on_delete=models.CASCADE,
+        verbose_name='tipo de cuenta',
+        blank=True, null=True
+    )
+    numero_cuenta = models.CharField('número de cuenta', max_length=20, blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'datos contractuales'
