@@ -1,0 +1,159 @@
+[
+  {
+    "model": "api.tipoformacion",
+    "pk": 1,
+    "fields": {
+      "nombre": "Pregrado"
+    }
+  },
+  {
+    "model": "api.tipoformacion",
+    "pk": 2,
+    "fields": {
+      "nombre": "Postgrado"
+    }
+  },
+  {
+    "model": "api.tipoformacion",
+    "pk": 3,
+    "fields": {
+      "nombre": "Técnica"
+    }
+  },
+  {
+    "model": "api.carrera",
+    "pk": 1,
+    "fields": {
+      "nombre": "Ingeniería Civil en Informática"
+    }
+  },
+  {
+    "model": "api.carrera",
+    "pk": 2,
+    "fields": {
+      "nombre": "Técnico en Administración de Empresa"
+    }
+  },
+  {
+    "model": "api.carrera",
+    "pk": 3,
+    "fields": {
+      "nombre": "Magíster en Inteligencia Artificial"
+    }
+  },
+  {
+    "model": "api.estadoformacion",
+    "pk": 1,
+    "fields": {
+      "nombre": "En proceso"
+    }
+  },
+  {
+    "model": "api.estadoformacion",
+    "pk": 2,
+    "fields": {
+      "nombre": "Terminada"
+    }
+  },
+  {
+    "model": "api.estadoformacion",
+    "pk": 3,
+    "fields": {
+      "nombre": "Congelada"
+    }
+  },
+  {
+    "model": "api.estadoformacion",
+    "pk": 4,
+    "fields": {
+      "nombre": "Descartada"
+    }
+  },
+  {
+    "model": "api.institucion",
+    "pk": 1,
+    "fields": {
+      "tipo_institucion": 1,
+      "nombre": "Universidad de Los Lagos"
+    }
+  },
+  {
+    "model": "api.institucion",
+    "pk": 2,
+    "fields": {
+      "tipo_institucion": 2,
+      "nombre": "INACAP"
+    }
+  },
+  {
+    "model": "api.institucion",
+    "pk": 3,
+    "fields": {
+      "tipo_institucion": 3,
+      "nombre": "La Araucana"
+    }
+  },
+  {
+    "model": "api.tipoinstitucion",
+    "pk": 1,
+    "fields": {
+      "nombre": "Universidad"
+    }
+  },
+  {
+    "model": "api.tipoinstitucion",
+    "pk": 2,
+    "fields": {
+      "nombre": "Instituto"
+    }
+  },
+  {
+    "model": "api.tipoinstitucion",
+    "pk": 3,
+    "fields": {
+      "nombre": "Centro de Formación Técnica"
+    }
+  },
+  {
+    "model": "api.tipootroformacion",
+    "pk": 1,
+    "fields": {
+      "nombre": "Curso online"
+    }
+  },
+  {
+    "model": "api.tipootroformacion",
+    "pk": 2,
+    "fields": {
+      "nombre": "Capacitación"
+    }
+  },
+  {
+    "model": "api.tipootroformacion",
+    "pk": 3,
+    "fields": {
+      "nombre": "Curso presencial"
+    }
+  },
+  {
+    "model": "api.diploma",
+    "pk": 1,
+    "fields": {
+      "nombre": "Certificado en Python Avanzado"
+    }
+  },
+  {
+    "model": "api.diploma",
+    "pk": 2,
+    "fields": {
+      "nombre": "Docker para principiantes"
+    }
+  },
+  {
+    "model": "api.diploma",
+    "pk": 3,
+    "fields": {
+      "nombre": "Full Stack developer desde cero"
+    }
+  }
+]

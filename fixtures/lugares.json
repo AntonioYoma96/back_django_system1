@@ -1,0 +1,454 @@
+[
+  {
+    "model": "api.region",
+    "pk": 1,
+    "fields": {
+      "codigo": "01",
+      "nombre": "Tarapacá"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 2,
+    "fields": {
+      "codigo": "02",
+      "nombre": "Antofagasta"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 3,
+    "fields": {
+      "codigo": "03",
+      "nombre": "Atacama"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 4,
+    "fields": {
+      "codigo": "04",
+      "nombre": "Coquimbo"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 5,
+    "fields": {
+      "codigo": "05",
+      "nombre": "Valparaíso"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 6,
+    "fields": {
+      "codigo": "06",
+      "nombre": "Libertador General Bernardo O'Higgins"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 7,
+    "fields": {
+      "codigo": "07",
+      "nombre": "Maule"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 8,
+    "fields": {
+      "codigo": "08",
+      "nombre": "Biobío"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 9,
+    "fields": {
+      "codigo": "09",
+      "nombre": "La Araucanía"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 10,
+    "fields": {
+      "codigo": "10",
+      "nombre": "Los Lagos"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 11,
+    "fields": {
+      "codigo": "11",
+      "nombre": "Aysén del General Carlos Ibáñez del Campo"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 12,
+    "fields": {
+      "codigo": "12",
+      "nombre": "Magallanes y de la Antártica Chilena"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 13,
+    "fields": {
+      "codigo": "13",
+      "nombre": "Metropolitana de Santiago"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 14,
+    "fields": {
+      "codigo": "14",
+      "nombre": "Los Ríos"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 15,
+    "fields": {
+      "codigo": "15",
+      "nombre": "Arica y Parinacota"
+    }
+  },
+  {
+    "model": "api.region",
+    "pk": 16,
+    "fields": {
+      "codigo": "16",
+      "nombre": "Ñuble"
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.provincia",
+    "pk": 1,
+    "fields": {
+      "codigo": "011",
+      "nombre": "Iquique",
+      "region": 1
+    }
+  },
+  {
+    "model": "api.comuna",
+    "pk": 1,
+    "fields": {
+      "codigo": "01101",
+      "nombre": "Iquique",
+      "provincia": 1
+    }
+  }
+]
