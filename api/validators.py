@@ -6,13 +6,14 @@ from django.utils.translation import gettext_lazy as _
 
 def validate_run(valor):
     """
-    Método para validar RUN chileno
-
-    Este método está basado en el código de esta `fuente
+    validate_run es una función que revisa el valor de entrada y levanta errores en el caso de ser un RUN o RUT mal
+    digitado. El algoritmo de revisión del RUN o RUT con el número verificador está basado en el código de esta `fuente
     <https://www.lawebdelprogramador.com/codigo/Python/3532-Valida-Rut-Chile.html>`_.
 
-    :param valor: El valor de entrada sin formatear
-    :raise Error de validación a causa de un RUN mal digitado
+    :param valor: El valor de entrada sin formatear.
+
+    :raise:
+        :ValidationError: Error de validación a causa de un RUN mal digitado.
     """
     estandarizado = valor.upper()
     if estandarizado.find('-') != -1 or estandarizado.find('.') != -1:

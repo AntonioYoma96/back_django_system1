@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import environ
@@ -99,3 +100,8 @@ STATIC_URL = '/static/'
 
 # Custom User
 AUTH_USER_MODEL = 'users.CustomUser'
+
+# Preload fixture dirs
+FIXTURE_DIRS = [
+    os.path.join(BASE_DIR, 'fixtures')
+]

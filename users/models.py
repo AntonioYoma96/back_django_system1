@@ -5,18 +5,19 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class CustomUserManager(BaseUserManager):
-    """Custom manager for the change of username to email as unique identifier for authentication
-
-    It's subclassing BaseUserManager for the minimum changes in the user structure.
+    """
+    La clase CustomUserManager es una subclase de :class:`django.contrib.auth.base_user.BaseUserManager` para editar
+    los atajos de Django de creación de usuarios.
     """
 
     def create_user(self, email, password, **extra_fields):
-        """Function for the custom manager that creates standard user
+        """
+        Función para la creación de usuarios con el administrador de Django.
 
-        :param email: Email for the new user
-        :param password: Password for the new user
-        :param extra_fields: Other fields of user model for his creation
-        :return: New user model
+        :param email: Email para el nuevo usuario.
+        :param password: Contraseña del nuevo usuario.
+        :param extra_fields: Arreglo con otros campos del usuario.
+        :return: El modelo del nuevo :class:`CustomUser` creado.
         """
         if not email:
             raise ValueError(_('The email must be set'))
@@ -27,14 +28,15 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, **extra_fields):
-        """Function for the custom manager that creates super user.
+        """
+        Función para la creación de super usuarios con el administrador de Django.
 
-        This function also specifies superuser roles like is_staff, is_superuser and is active.
-
-        :param email: Email for the new superuser
-        :param password: Password for the new superuser
-        :param extra_fields: Other fields of user model for his creation
-        :return: New user model (calling create_user method)
+        :param email: Email para el nuevo super usuario.
+        :param password: Contraseña del nuevo super usuario.
+        :param extra_fields: Arreglo con otros campos del super usuario.
+        :return: El modelo del nuevo :class:`CustomUser` creado (llamando la función :func:`create_user`)
+        :raise
+            :ValueError: Errores de incoherencias con la creación de super usuarios.
         """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
@@ -47,9 +49,18 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    """Class for the new user
+    """
+    La clase CustomUser es una subclase de :class:`django.contrib.auth.models.AbstractUser` que reemplaza el modelo
+    de usuario de defecto de Django, para establecer campos necesarios para el sistema.
 
-    It's subclassing AbstractUser for the minimum changes in the user model.
+    Los cambios más importantes al modelo están representados en los siguientes parámetros:
+
+    :param username: Pasa a estar vacío, ya que se usará otro campo como identificador de acceso al sistema.
+    :param first_name: Pasa a estar vacío, ya que no es necesario en el sistema.
+    :param last_name: Pasa a estar vacío, ya que no es necesario en el sistema.
+    :param email: Campo de tipo texto para el usuario del sistema. Este será el nuevo identificador de acceso (incluye
+        validación de email, único).
+    :param USERNAME_FIELD: Este campo define el identificador del sistema, cambiado a :attr:`email`.
     """
     username = None
     first_name = None
@@ -62,8 +73,10 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     def __str__(self):
-        """Function that send a formatted version of CustomUser
+        """
+        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
+        funciones de Django.
 
-        :return: String of user's emails
+        :return: Cadena de texto con el email del usuario.
         """
         return self.email

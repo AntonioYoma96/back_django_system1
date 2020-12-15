@@ -418,4 +418,3 @@ migrations/
 
 # Sphinx docs
 docs/_build
-docs/*.rst
