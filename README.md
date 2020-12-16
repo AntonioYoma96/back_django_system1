@@ -5,14 +5,14 @@ junto a su kit de herramientas [Django Rest Framework](https://www.django-rest-f
 
 ## Tabla de contenidos
 1. [Requerimientos](#requerimientos)
-2. [Pasos de instalación](#pasos-de-instalacin)
-3. [Configuración Sphinx](#configuracin-sphinx)
+2. [Pasos de instalación](#instalacion)
+3. [Configuración Sphinx](#sphinx)
  
 ## Requerimientos
 Para levantar la aplicación, se necesitan las siguientes aplicaciones instaladas:
 - Python 3.9
 
-## Pasos de instalación
+## Pasos de instalación {#instalacion}
 Los pasos para la instalación de esta aplicación son los siguientes:
 1. Clonar este repositorio en la ubicación deseada.
 2. Correr el comando `pip install -r requirements.txt`.
@@ -29,7 +29,7 @@ _FIXTURE_NAME_ hace referencia a todos los archivos en la ubicación [fixtures/]
 7. **EXTRA**: Para generar la documentación, basta con moverse a la ubicación `docs/` y ejecutar el comando `make html`.
 Como recomendación, eliminar la carpeta `_build` cada vez que se generen estos documentos. Para revisar el resultado,
 abrir el archivo _index_ en la ruta `docs/_build/index.html`.
-## Configuración Sphinx
+## Configuración Sphinx {#sphinx}
 Adicionalmente si se necesita agregar o corregir la documentación, revisar los archivos en formato **ReStructuredText**
 (_.rst_) en la ubicación `docs/` para revisar la ruta a las definiciones de los módulos o agregar cualquier contenido
 deseado.
