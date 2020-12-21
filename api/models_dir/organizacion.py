@@ -188,7 +188,7 @@ class Unidad(models.Model):
         unidad_elegido.save()
 
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(max_length=100)
     area_funcional = models.ForeignKey('AreaFuncional', on_delete=models.CASCADE, verbose_name='área funcional')
 
     class Meta:
@@ -196,8 +196,13 @@ class Unidad(models.Model):
         Clase meta encargada de la información general para el funcionamiento en Django.
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
+        :param constraints: Lista de restricciones de clase :class:`django.models.UniqueConstraint` para restricciones
+            del modelo.
         """
         verbose_name_plural = 'unidades'
+        constraints = [
+            models.UniqueConstraint(fields=['nombre', 'area_funcional'], name='unique_unidad_area_funcional')
+        ]
 
     def __str__(self):
         """
@@ -206,7 +211,7 @@ class Unidad(models.Model):
 
         :return: Cadena de texto con nombre de la unidad.
         """
-        return self.nombre
+        return f'{self.nombre} - {self.area_funcional.nombre}'
 
 
 class AreaFuncional(models.Model):

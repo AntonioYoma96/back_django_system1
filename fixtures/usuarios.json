@@ -1,0 +1,77 @@
+[
+  {
+    "model": "users.customuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$wJEKqTosccxt$9PB6hUXdhCn5G8ZRTm4uu8cgdaT3NGBjGGtDQhETe/U=",
+      "last_login": "2020-12-07T19:32:27.735Z",
+      "is_superuser": true,
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-12-07T19:32:17.520Z",
+      "email": "admin@sp.cl",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$eTLIReiPEZHN$OHKLq64XeAFtVjPpfPg1rkubVSZiMbG5dY/IKPS+tDU=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2020-12-07T19:51:06Z",
+      "email": "gestor@sp.cl",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$5HnKq5l3JO3m$CPZttfpBafaUSVR2xO4GIcuDnF2vF8dD5NdFwpo64Xo=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-07T19:52:44Z",
+      "email": "desarrollador@sp.cl",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$CckNIsPixFW3$YKq8aeY/H2n7w/GpRhoam7H0+/UPAbcGVD4DbP1EKDQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-07T19:53:18Z",
+      "email": "analista@sp.cl",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$a42K7ynwW7R0$dH4zmH2du+SikABbbLvbb40xLGp0Mb+4YdYgG/YLG3w=",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-12-17T15:54:11.787Z",
+      "email": "gerente@sp.cl",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

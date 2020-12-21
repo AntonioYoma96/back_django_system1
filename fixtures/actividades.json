@@ -1,0 +1,154 @@
+[
+  {
+    "model": "api.datosactividad",
+    "pk": 1,
+    "fields": {
+      "nombre": "Resolución ticket simple",
+      "descripcion": "",
+      "tiempo_maximo": 15,
+      "tiempo_minimo": 60,
+      "cargo": 22
+    }
+  },
+  {
+    "model": "api.datosactividad",
+    "pk": 2,
+    "fields": {
+      "nombre": "Resolución ticket complejo",
+      "descripcion": "",
+      "tiempo_maximo": 60,
+      "tiempo_minimo": 600,
+      "cargo": 22
+    }
+  },
+  {
+    "model": "api.datosactividad",
+    "pk": 3,
+    "fields": {
+      "nombre": "Reunión de equipo",
+      "descripcion": "",
+      "tiempo_maximo": 30,
+      "tiempo_minimo": 120,
+      "cargo": 31
+    }
+  },
+  {
+    "model": "api.datosactividad",
+    "pk": 4,
+    "fields": {
+      "nombre": "Reunión cliente",
+      "descripcion": "",
+      "tiempo_maximo": 60,
+      "tiempo_minimo": 120,
+      "cargo": 31
+    }
+  },
+  {
+    "model": "api.proyecto",
+    "pk": 1,
+    "fields": {
+      "nombre": "SmartPeople 2",
+      "cliente": 1,
+      "repositorio": "https://gitlab.sistemasexpertos.cl/zona-sur/smartpeople-v2-back"
+    }
+  },
+  {
+    "model": "api.proyecto",
+    "pk": 2,
+    "fields": {
+      "nombre": "ERP",
+      "cliente": 2,
+      "repositorio": null
+    }
+  },
+  {
+    "model": "api.proyecto",
+    "pk": 3,
+    "fields": {
+      "nombre": "Mapa de derivación",
+      "cliente": 3,
+      "repositorio": null
+    }
+  },
+  {
+    "model": "api.cliente",
+    "pk": 1,
+    "fields": {
+      "nombre": "Sistemas Expertos"
+    }
+  },
+  {
+    "model": "api.cliente",
+    "pk": 2,
+    "fields": {
+      "nombre": "Hospital Puerto Montt"
+    }
+  },
+  {
+    "model": "api.cliente",
+    "pk": 3,
+    "fields": {
+      "nombre": "Clínica Universitaria Puerto Montt"
+    }
+  },
+  {
+    "model": "api.tiposoporte",
+    "pk": 1,
+    "fields": {
+      "nombre": "Clave bloqueada"
+    }
+  },
+  {
+    "model": "api.tiposoporte",
+    "pk": 2,
+    "fields": {
+      "nombre": "Solicitud de cuenta"
+    }
+  },
+  {
+    "model": "api.tiposoporte",
+    "pk": 3,
+    "fields": {
+      "nombre": "Error en base de datos"
+    }
+  },
+  {
+    "model": "api.tiposoporte",
+    "pk": 4,
+    "fields": {
+      "nombre": "Error de interfaz"
+    }
+  },
+  {
+    "model": "api.modulo",
+    "pk": 1,
+    "fields": {
+      "nombre": "Tickets",
+      "proyecto": 1
+    }
+  },
+  {
+    "model": "api.modulo",
+    "pk": 2,
+    "fields": {
+      "nombre": "Registro de actividades",
+      "proyecto": 1
+    }
+  },
+  {
+    "model": "api.modulo",
+    "pk": 3,
+    "fields": {
+      "nombre": "Funcionarios",
+      "proyecto": 2
+    }
+  },
+  {
+    "model": "api.modulo",
+    "pk": 4,
+    "fields": {
+      "nombre": "Registro de reglas",
+      "proyecto": 3
+    }
+  }
+]

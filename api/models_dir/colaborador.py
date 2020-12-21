@@ -313,7 +313,7 @@ class Comuna(models.Model):
         
         :return: Cadena de texto con código y nombre.
         """
-        return f'{self.codigo} :param {self.nombre}'
+        return f'{self.codigo} - {self.nombre}'
 
 
 class Provincia(models.Model):
@@ -367,7 +367,7 @@ class Provincia(models.Model):
         
         :return: Cadena de texto con código y nombre.
         """
-        return f'{self.codigo} :param {self.nombre}'
+        return f'{self.codigo} - {self.nombre}'
 
 
 class Region(models.Model):
@@ -423,7 +423,7 @@ class Region(models.Model):
         
         :return: Cadena de texto con código y nombre.
         """
-        return f'{self.codigo} :param {self.nombre}'
+        return f'{self.codigo} - {self.nombre}'
 
 
 class Hijo(models.Model):
@@ -621,7 +621,7 @@ class ColaboradorSkill(models.Model):
         
         :return: Cadena de texto con nombre simple del colaborador, nombre de la skill y nombre del nivel de skill
         """
-        return '{} :param {} :param {}'.format(
+        return '{} - {} - {}'.format(
             self.colaborador.simple_name(),
             self.skill.nombre,
             self.nivel_skill.nombre,

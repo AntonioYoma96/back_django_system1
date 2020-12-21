@@ -1,0 +1,486 @@
+[
+  {
+    "model": "api.cargo",
+    "pk": 1,
+    "fields": {
+      "nombre": "Socio Director"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 2,
+    "fields": {
+      "nombre": "Gerente General"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 3,
+    "fields": {
+      "nombre": "Subgerente de Personas"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 4,
+    "fields": {
+      "nombre": "Analista de Capacitación y Gestión"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 5,
+    "fields": {
+      "nombre": "Analista de Recursos Humanos"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 6,
+    "fields": {
+      "nombre": "Gerente Comercial"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 7,
+    "fields": {
+      "nombre": "Product Manager"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 8,
+    "fields": {
+      "nombre": "Consultor de Pre Venta"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 9,
+    "fields": {
+      "nombre": "Gerente de TI y Seguridad de la Información"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 10,
+    "fields": {
+      "nombre": "Arquitecto de Soluciones TI"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 11,
+    "fields": {
+      "nombre": "Líder de Infraestructura TI"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 12,
+    "fields": {
+      "nombre": "Ingeniero de Seguridad y Continuidad TI"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 13,
+    "fields": {
+      "nombre": "Gerente de Operaciones"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 14,
+    "fields": {
+      "nombre": "Consultor Funcional Senior"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 15,
+    "fields": {
+      "nombre": "Subgerente de Desarrollo"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 16,
+    "fields": {
+      "nombre": "Consultor Técnico"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 17,
+    "fields": {
+      "nombre": "Arquitecto de Software"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 18,
+    "fields": {
+      "nombre": "Jefe de Desarrollo"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 19,
+    "fields": {
+      "nombre": "Supervisor de Desarrollo"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 20,
+    "fields": {
+      "nombre": "Desarrollador Senior"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 21,
+    "fields": {
+      "nombre": "Desarrollador Mobile Senior"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 22,
+    "fields": {
+      "nombre": "Desarrollador"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 23,
+    "fields": {
+      "nombre": "Encargado de QA"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 24,
+    "fields": {
+      "nombre": "Encargado de Service Desk"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 25,
+    "fields": {
+      "nombre": "Jefe de Oficina de Proyectos"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 26,
+    "fields": {
+      "nombre": "Coordinador de Oficina de Proyectos"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 27,
+    "fields": {
+      "nombre": "Jefe de Operación Zonal"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 28,
+    "fields": {
+      "nombre": "Jefe de Proyectos de Implementación"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 29,
+    "fields": {
+      "nombre": "Consultor Funcional Implementación"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 30,
+    "fields": {
+      "nombre": "Gestor de Proyectos"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 31,
+    "fields": {
+      "nombre": "Analista de Proyectos"
+    }
+  },
+  {
+    "model": "api.cargo",
+    "pk": 32,
+    "fields": {
+      "nombre": "Aseo y Limpieza"
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 1,
+    "fields": {
+      "nombre": "Proyectos",
+      "area_funcional": 2
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 2,
+    "fields": {
+      "nombre": "Proyectos",
+      "area_funcional": 6
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 3,
+    "fields": {
+      "nombre": "Desarrollo",
+      "area_funcional": 3
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 4,
+    "fields": {
+      "nombre": "Desarrollo",
+      "area_funcional": 2
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 5,
+    "fields": {
+      "nombre": "Seguridad y TI",
+      "area_funcional": 3
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 6,
+    "fields": {
+      "nombre": "Administración y Finanzas",
+      "area_funcional": 1
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 7,
+    "fields": {
+      "nombre": "Administración y Finanzas",
+      "area_funcional": 6
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 8,
+    "fields": {
+      "nombre": "Administración y Finanzas",
+      "area_funcional": 4
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 9,
+    "fields": {
+      "nombre": "Comercial",
+      "area_funcional": 4
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 10,
+    "fields": {
+      "nombre": "Comercial",
+      "area_funcional": 6
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 11,
+    "fields": {
+      "nombre": "Personas",
+      "area_funcional": 7
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 12,
+    "fields": {
+      "nombre": "Personas",
+      "area_funcional": 2
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 13,
+    "fields": {
+      "nombre": "Innovación y Desarrollo",
+      "area_funcional": 3
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 14,
+    "fields": {
+      "nombre": "Innovación y Desarrollo",
+      "area_funcional": 6
+    }
+  },
+  {
+    "model": "api.unidad",
+    "pk": 15,
+    "fields": {
+      "nombre": "Productos",
+      "area_funcional": 2
+    }
+  },
+  {
+    "model": "api.areafuncional",
+    "pk": 1,
+    "fields": {
+      "nombre": "Directorio - Gerencia General"
+    }
+  },
+  {
+    "model": "api.areafuncional",
+    "pk": 2,
+    "fields": {
+      "nombre": "Gerencia de Operaciones"
+    }
+  },
+  {
+    "model": "api.areafuncional",
+    "pk": 3,
+    "fields": {
+      "nombre": "Gerencia de TI y Seguridad"
+    }
+  },
+  {
+    "model": "api.areafuncional",
+    "pk": 4,
+    "fields": {
+      "nombre": "Gerencia Comercial"
+    }
+  },
+  {
+    "model": "api.areafuncional",
+    "pk": 5,
+    "fields": {
+      "nombre": "Gerencia de Finanzas"
+    }
+  },
+  {
+    "model": "api.areafuncional",
+    "pk": 6,
+    "fields": {
+      "nombre": "Gerencia General"
+    }
+  },
+  {
+    "model": "api.areafuncional",
+    "pk": 7,
+    "fields": {
+      "nombre": "Subgerencia de Personas"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 1,
+    "fields": {
+      "nombre": "Director"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 2,
+    "fields": {
+      "nombre": "Gerente"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 3,
+    "fields": {
+      "nombre": "Subgerente"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 4,
+    "fields": {
+      "nombre": "Jefe"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 5,
+    "fields": {
+      "nombre": "Gestor"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 6,
+    "fields": {
+      "nombre": "Supervisor"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 7,
+    "fields": {
+      "nombre": "Analista"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 8,
+    "fields": {
+      "nombre": "Administrativo"
+    }
+  },
+  {
+    "model": "api.nivelresponsabilidad",
+    "pk": 9,
+    "fields": {
+      "nombre": "Operativo"
+    }
+  },
+  {
+    "model": "api.centrocosto",
+    "pk": 1,
+    "fields": {
+      "nombre": "Casa Matriz"
+    }
+  },
+  {
+    "model": "api.centrocosto",
+    "pk": 2,
+    "fields": {
+      "nombre": "Puerto Montt"
+    }
+  },
+  {
+    "model": "api.centrocosto",
+    "pk": 3,
+    "fields": {
+      "nombre": "Oficina Recreo"
+    }
+  },
+  {
+    "model": "api.centrocosto",
+    "pk": 4,
+    "fields": {
+      "nombre": "Hospital de Iquique"
+    }
+  }
+]

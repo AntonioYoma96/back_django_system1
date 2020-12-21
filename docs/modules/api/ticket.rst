@@ -26,7 +26,7 @@ Modulo TipoTicket
 
 Modulo EstadoTicket
 ====================
-.. autoclass:: api.models.EstadoTicket
+.. autoclass:: api.models.EtapaTicket
     :special-members: __str__
 
 Modulo ImagenTicket

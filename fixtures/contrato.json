@@ -1,0 +1,282 @@
+[
+  {
+    "model": "api.tipocontrato",
+    "pk": 1,
+    "fields": {
+      "nombre": "Indefinido"
+    }
+  },
+  {
+    "model": "api.tipocontrato",
+    "pk": 2,
+    "fields": {
+      "nombre": "Fijo"
+    }
+  },
+  {
+    "model": "api.tipocontrato",
+    "pk": 3,
+    "fields": {
+      "nombre": "Honorarios"
+    }
+  },
+  {
+    "model": "api.previsionafp",
+    "pk": 1,
+    "fields": {
+      "nombre": "AFP Capital"
+    }
+  },
+  {
+    "model": "api.previsionafp",
+    "pk": 2,
+    "fields": {
+      "nombre": "AFP Cuprum"
+    }
+  },
+  {
+    "model": "api.previsionafp",
+    "pk": 3,
+    "fields": {
+      "nombre": "AFP Habitat"
+    }
+  },
+  {
+    "model": "api.previsionafp",
+    "pk": 4,
+    "fields": {
+      "nombre": "AFP Modelo"
+    }
+  },
+  {
+    "model": "api.previsionafp",
+    "pk": 5,
+    "fields": {
+      "nombre": "AFP Planvital"
+    }
+  },
+  {
+    "model": "api.previsionafp",
+    "pk": 6,
+    "fields": {
+      "nombre": "AFP Provida"
+    }
+  },
+  {
+    "model": "api.previsionafp",
+    "pk": 7,
+    "fields": {
+      "nombre": "AFP UNO"
+    }
+  },
+  {
+    "model": "api.previsionsalud",
+    "pk": 1,
+    "fields": {
+      "nombre": "Fonasa"
+    }
+  },
+  {
+    "model": "api.previsionsalud",
+    "pk": 2,
+    "fields": {
+      "nombre": "Isapre Banmédica"
+    }
+  },
+  {
+    "model": "api.previsionsalud",
+    "pk": 3,
+    "fields": {
+      "nombre": "Isapre Consalud"
+    }
+  },
+  {
+    "model": "api.previsionsalud",
+    "pk": 4,
+    "fields": {
+      "nombre": "Isapre Colmena"
+    }
+  },
+  {
+    "model": "api.previsionsalud",
+    "pk": 5,
+    "fields": {
+      "nombre": "Isapre CruzBlanca"
+    }
+  },
+  {
+    "model": "api.previsionsalud",
+    "pk": 6,
+    "fields": {
+      "nombre": "Isapre Nueva Masvida"
+    }
+  },
+  {
+    "model": "api.previsionsalud",
+    "pk": 7,
+    "fields": {
+      "nombre": "Isapre Vida Tres"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 1,
+    "fields": {
+      "nombre": "Banco Bice"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 2,
+    "fields": {
+      "nombre": "Banco BTG Pactual Chile"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 3,
+    "fields": {
+      "nombre": "Banco Consorcio"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 4,
+    "fields": {
+      "nombre": "Banco de Chile"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 5,
+    "fields": {
+      "nombre": "Banco de Crédito e Inversiones"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 6,
+    "fields": {
+      "nombre": "Banco del Estado de Chile"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 7,
+    "fields": {
+      "nombre": "Banco do Brasil S.A."
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 8,
+    "fields": {
+      "nombre": "Banco Falabella"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 9,
+    "fields": {
+      "nombre": "Banco Internacional"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 10,
+    "fields": {
+      "nombre": "Banco Ripley"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 11,
+    "fields": {
+      "nombre": "Banco Santander-Chile"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 12,
+    "fields": {
+      "nombre": "Banco Security"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 13,
+    "fields": {
+      "nombre": "Bank of China, Agencia en Chile"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 14,
+    "fields": {
+      "nombre": "China Construction Bank, Agencia en Chile"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 15,
+    "fields": {
+      "nombre": "HSBC Bank (Chile)"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 16,
+    "fields": {
+      "nombre": "Itaú Corpbanca"
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 17,
+    "fields": {
+      "nombre": "JP Morgan Chase Bank, N.A."
+    }
+  },
+  {
+    "model": "api.banco",
+    "pk": 18,
+    "fields": {
+      "nombre": "Scotiabank Chile"
+    }
+  },
+  {
+    "model": "api.tipocuenta",
+    "pk": 1,
+    "fields": {
+      "nombre": "Cuenta de Ahorro"
+    }
+  },
+  {
+    "model": "api.tipocuenta",
+    "pk": 2,
+    "fields": {
+      "nombre": "Cuenta Vista"
+    }
+  },
+  {
+    "model": "api.tipocuenta",
+    "pk": 3,
+    "fields": {
+      "nombre": "Cuenta Chequera Electrónica"
+    }
+  },
+  {
+    "model": "api.tipocuenta",
+    "pk": 4,
+    "fields": {
+      "nombre": "Cuenta Rut"
+    }
+  },
+  {
+    "model": "api.tipocuenta",
+    "pk": 5,
+    "fields": {
+      "nombre": "Cuenta Corriente"
+    }
+  }
+]

@@ -1,0 +1,208 @@
+[
+  {
+    "model": "api.prioridad",
+    "pk": 1,
+    "fields": {
+      "nombre": "Baja",
+      "valor": 1
+    }
+  },
+  {
+    "model": "api.prioridad",
+    "pk": 2,
+    "fields": {
+      "nombre": "Media",
+      "valor": 2
+    }
+  },
+  {
+    "model": "api.prioridad",
+    "pk": 3,
+    "fields": {
+      "nombre": "Alta",
+      "valor": 3
+    }
+  },
+  {
+    "model": "api.prioridad",
+    "pk": 4,
+    "fields": {
+      "nombre": "Urgente",
+      "valor": 4
+    }
+  },
+  {
+    "model": "api.tipoticket",
+    "pk": 1,
+    "fields": {
+      "nombre": "Requerimiento Implementación"
+    }
+  },
+  {
+    "model": "api.tipoticket",
+    "pk": 2,
+    "fields": {
+      "nombre": "Requerimiento Evolutivo"
+    }
+  },
+  {
+    "model": "api.tipoticket",
+    "pk": 3,
+    "fields": {
+      "nombre": "Requerimiento Normativo"
+    }
+  },
+  {
+    "model": "api.tipoticket",
+    "pk": 4,
+    "fields": {
+      "nombre": "Requerimiento BD"
+    }
+  },
+  {
+    "model": "api.tipoticket",
+    "pk": 5,
+    "fields": {
+      "nombre": "Incidencia en Producción"
+    }
+  },
+  {
+    "model": "api.tipoticket",
+    "pk": 6,
+    "fields": {
+      "nombre": "Incidencia en Implementación"
+    }
+  },
+  {
+    "model": "api.tipoticket",
+    "pk": 7,
+    "fields": {
+      "nombre": "Requerimiento de Consultoría"
+    }
+  },
+  {
+    "model": "api.etapaticket",
+    "pk": 1,
+    "fields": {
+      "nombre": "Revisión",
+      "tipo": null,
+      "rev_min": null,
+      "rev_max": null,
+      "dev_min": null,
+      "dev_mx": null
+    }
+  },
+  {
+    "model": "api.etapaticket",
+    "pk": 2,
+    "fields": {
+      "nombre": "Desarrollo",
+      "tipo": "Simple - Corto",
+      "rev_min": 20,
+      "rev_max": 30,
+      "dev_min": 60,
+      "dev_mx": 240
+    }
+  },
+  {
+    "model": "api.etapaticket",
+    "pk": 3,
+    "fields": {
+      "nombre": "Desarrollo",
+      "tipo": "Simple - Largo",
+      "rev_min": 45,
+      "rev_max": 90,
+      "dev_min": 300,
+      "dev_mx": 1200
+    }
+  },
+  {
+    "model": "api.etapaticket",
+    "pk": 4,
+    "fields": {
+      "nombre": "Desarrollo",
+      "tipo": "Complejidad - Media",
+      "rev_min": 45,
+      "rev_max": 120,
+      "dev_min": 720,
+      "dev_mx": 1800
+    }
+  },
+  {
+    "model": "api.etapaticket",
+    "pk": 5,
+    "fields": {
+      "nombre": "Desarrollo",
+      "tipo": "Complejidad - Alta",
+      "rev_min": 90,
+      "rev_max": 300,
+      "dev_min": 1440,
+      "dev_mx": 3600
+    }
+  },
+  {
+    "model": "api.etapaticket",
+    "pk": 6,
+    "fields": {
+      "nombre": "Validación",
+      "tipo": null,
+      "rev_min": null,
+      "rev_max": null,
+      "dev_min": null,
+      "dev_mx": null
+    }
+  },
+  {
+    "model": "api.etapaticket",
+    "pk": 7,
+    "fields": {
+      "nombre": "Finalización",
+      "tipo": null,
+      "rev_min": null,
+      "rev_max": null,
+      "dev_min": null,
+      "dev_mx": null
+    }
+  },
+  {
+    "model": "api.etiqueta",
+    "pk": 1,
+    "fields": {
+      "nombre": "Falta información",
+      "nivel_severidad": "danger",
+      "tickets": [],
+      "mensajes": []
+    }
+  },
+  {
+    "model": "api.etiqueta",
+    "pk": 2,
+    "fields": {
+      "nombre": "Mejorar redacción",
+      "nivel_severidad": "warning",
+      "tickets": [],
+      "mensajes": []
+    }
+  },
+  {
+    "model": "api.origen",
+    "pk": 1,
+    "fields": {
+      "nombre": "MDA"
+    }
+  },
+  {
+    "model": "api.origen",
+    "pk": 2,
+    "fields": {
+      "nombre": "Interna"
+    }
+  },
+  {
+    "model": "api.origen",
+    "pk": 3,
+    "fields": {
+      "nombre": "Cliente"
+    }
+  }
+]

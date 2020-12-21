@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from field_history.tracker import FieldHistoryTracker
 
 
@@ -57,7 +58,7 @@ class Ticket(models.Model):
     El modelo Ticket representa cualquier tipo de solicitud o incidencia que pueden generarse entre las entidades del
     modelo :class:`Colaborador`. Por lo tanto este modelo está asociado a los modelos :class:`Colaborador` como
     solicitante, receptor y validador, :class:`Origen`, :class:`Modulo`, :class:`Prioridad`, :class:`TipoTicket` y
-    :class:`EstadoTicket` para una mejor comprensión.
+    :class:`EtapaTicket` para una mejor comprensión.
 
     Además cuenta con un parámetro especial para el registro de historial del modelo Ticket basado en la aplicación
     **django-field-history**.
@@ -76,7 +77,7 @@ class Ticket(models.Model):
         de enlaces, opcional).
     :param asunto: Campo de texto para el asunto del ticket (largo máximo: 100 caracteres).
     :param descripcion: Campo de texto para la descripcion del ticket.
-    :param estado_ticket: Clave foránea al modelo :class:`EstadoTicket`.
+    :param estado_ticket: Clave foránea al modelo :class:`EtapaTicket`.
     :param created: Campo de fecha y hora de la fecha de creación del colaborador (Auto generado).
     :param modified: Campo de fecha y hora de la última fecha de modificación del colaborador (Auto generado).
     :param historial: Campo especial heredado de la clase :class:`field_history.tracker.FieldHistoryTracker` de la
@@ -86,7 +87,7 @@ class Ticket(models.Model):
     **Ejemplos de uso**
 
     Para su creación se necesita de los campos :class:`Colaborador`, :class:`Origen`, :class:`Modulo`,
-    :class:`Prioridad`, :class:`TipoTicket` y :class:`EstadoTicket` con datos en el sistema, y se usan los siguientes
+    :class:`Prioridad`, :class:`TipoTicket` y :class:`EtapaTicket` con datos en el sistema, y se usan los siguientes
     pasos:
 
     *Creación de Ticket*
@@ -100,7 +101,7 @@ class Ticket(models.Model):
         modulo_elegido = Modulo.objects.get(pk=1)
         prioridad_elegida = Prioridad.objects.get(pk=1)
         tipo_ticket_elegido = TipoTicket.objects.get(pk=1)
-        estado_ticket_elegido = EstadoTicket.objects.get(pk=1)
+        etapa_ticket_elegido = EtapaTicket.objects.get(pk=1)
 
         # Creación de la nueva Ticket
         nuevo_ticket = Ticket.objects.create(
@@ -112,7 +113,7 @@ class Ticket(models.Model):
             tipo_ticket=tipo_ticket_elegido,
             asunto='Botón deshabilitado',
             descripcion='El botón se encuentra deshabilitado, y no se puede imprimir reportes',
-            estado_ticket=estado_ticket_elegido
+            etapa_ticket=etapa_ticket_elegido
         )
 
     *Actualización del modelo Ticket*
@@ -147,7 +148,7 @@ class Ticket(models.Model):
     ruta = models.URLField(blank=True, null=True)
     asunto = models.CharField(max_length=100)
     descripcion = models.TextField('descripción')
-    estado_ticket = models.ForeignKey('EstadoTicket', on_delete=models.CASCADE, verbose_name='estado del ticket')
+    etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='estado del ticket')
     created = models.DateTimeField('creado', auto_now_add=True)
     modified = models.DateTimeField('modificado', auto_now=True)
 
@@ -158,9 +159,9 @@ class Ticket(models.Model):
         Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
         funciones de Django.
 
-        :return: Cadena de texto con ID y asunto del ticket, y el nombre del estado del ticket.
+        :return: Cadena de texto con ID y asunto del ticket, y el nombre de la etapa del ticket.
         """
-        return f'{self.id} - {self.asunto[:50]} - {self.estado_ticket.nombre}'
+        return f'{self.id} - {self.asunto[:50]} - {self.etapa_ticket.nombre}'
 
 
 class Prioridad(models.Model):
@@ -224,11 +225,6 @@ class TipoTicket(models.Model):
     El modelo TipoTicket es una representación de los tipos de ticket que puede tener el modelo :class:`Ticket`.
 
     :param nombre: Campo de texto con el nombre del tipo de ticket (largo máximo: 100 caracteres).
-    :param tipo: Campo de texto con la sub categorización del ticket (largo máximo: 50 caracteres, opcional).
-    :param rev_min: Campo numérico para la estimación mínima de revision del tipo de ticket (opcional).
-    :param rev_max: Campo numérico para la estimación máxima de revision del tipo de ticket (opcional).
-    :param dev_min: Campo numérico para la estimación mínima de desarrollo del tipo de ticket (opcional).
-    :param dev_mx: Campo numérico para la estimación máxima de desarrollo del tipo de ticket (opcional).
 
     **Ejemplos de uso**
 
@@ -258,6 +254,68 @@ class TipoTicket(models.Model):
 
     """
     nombre = models.CharField(max_length=100)
+
+    class Meta:
+        """
+        Clase meta encargada de la información general para el funcionamiento en Django.
+
+        :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
+        :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
+        """
+        verbose_name = 'tipo de ticket'
+        verbose_name_plural = 'tipos de ticket'
+
+    def __str__(self):
+        """
+        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
+        funciones de Django.
+
+        :return: Cadena de texto con nombre y tipo del tipo de ticket.
+        """
+        return self.nombre
+
+
+class EtapaTicket(models.Model):
+    """
+    El modelo EtapaTicket es una representación de los estados de ticket que se pueden poseer en el modelo
+    :class:`Ticket`.
+
+    :param nombre: Campo de texto con el nombre de la etapa del ticket (largo máximo: 50 caracteres, único).
+    :param tipo: Campo de texto con la sub categorización de la etapa del ticket (largo máximo: 50 caracteres,
+        opcional).
+    :param rev_min: Campo numérico para la estimación mínima de revision del tipo de etapa (opcional).
+    :param rev_max: Campo numérico para la estimación máxima de revision del tipo de etapa (opcional).
+    :param dev_min: Campo numérico para la estimación mínima de desarrollo del tipo de etapa (opcional).
+    :param dev_mx: Campo numérico para la estimación máxima de desarrollo del tipo de etapa (opcional).
+
+    **Ejemplos de uso**
+
+    Para su creación se usan los siguientes pasos:
+
+    *Creación de EtapaTicket*
+
+    Ejemplo:
+    ::
+        # Creación de la nueva EtapaTicket
+        nuevo_etapa_ticket = EtapaTicket.objects.create(
+            nombre='Revisión'
+        )
+
+    *Actualización del modelo EtapaTicket*
+
+    Ejemplo:
+    ::
+        # Obtener EtapaTicket existente
+        etapa_ticket_elegido = EtapaTicket.objects.get(pk=1)
+
+        # Generar cambios al estado de ticket obtenido
+        etapa_ticket_elegido.nombre = 'Desarrollo'
+
+        # Guardando cambios hechos
+        etapa_ticket_elegido.save()
+
+    """
+    nombre = models.CharField(max_length=50)
     tipo = models.CharField(max_length=50, blank=True, null=True)
     rev_min = models.PositiveSmallIntegerField('tiempo mínimo de revisión', blank=True, null=True)
     rev_max = models.PositiveSmallIntegerField('tiempo máximo de revisión', blank=True, null=True)
@@ -273,10 +331,10 @@ class TipoTicket(models.Model):
         :param constraints: Lista de restricciones de clase :class:`django.models.UniqueConstraint` para restricciones
             del modelo.
         """
-        verbose_name = 'tipo de ticket'
-        verbose_name_plural = 'tipos de ticket'
+        verbose_name = 'etapa del ticket'
+        verbose_name_plural = 'etapas de los tickets'
         constraints = [
-            models.UniqueConstraint(fields=['nombre', 'tipo'], name='unique_tipo_ticket')
+            models.UniqueConstraint(fields=['nombre', 'tipo'], name='unique_etapa_tipo_ticket')
         ]
 
     def __str__(self):
@@ -284,65 +342,12 @@ class TipoTicket(models.Model):
         Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
         funciones de Django.
 
-        :return: Cadena de texto con nombre y tipo del tipo de ticket.
+        :return: Cadena de texto con nombre de la etapa del ticket, y su tipo si lo incluye.
         """
-        return f'{self.nombre} - {self.tipo}'
-
-
-class EstadoTicket(models.Model):
-    """
-    El modelo EstadoTicket es una representación de los estados de ticket que se pueden poseer en el modelo
-    :class:`Ticket`.
-
-    :param nombre: Campo de texto con el nombre del estado del ticket (largo máximo: 50 caracteres, único).
-
-    **Ejemplos de uso**
-
-    Para su creación se usan los siguientes pasos:
-
-    *Creación de EstadoTicket*
-
-    Ejemplo:
-    ::
-        # Creación de la nueva EstadoTicket
-        nuevo_estado_ticket = EstadoTicket.objects.create(
-            nombre='En espera'
+        return '{}{}'.format(
+            self.nombre,
+            f' - {self.tipo}' if self.tipo else ""
         )
-
-    *Actualización del modelo EstadoTicket*
-
-    Ejemplo:
-    ::
-        # Obtener EstadoTicket existente
-        estado_ticket_elegido = EstadoTicket.objects.get(pk=1)
-
-        # Generar cambios al estado de ticket obtenido
-        estado_ticket_elegido.nombre = 'En hotfix'
-
-        # Guardando cambios hechos
-        estado_ticket_elegido.save()
-
-    """
-    nombre = models.CharField(max_length=50, unique=True)
-
-    class Meta:
-        """
-        Clase meta encargada de la información general para el funcionamiento en Django.
-
-        :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
-        :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
-        """
-        verbose_name = 'estado del ticket'
-        verbose_name_plural = 'estados del ticket'
-
-    def __str__(self):
-        """
-        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
-        funciones de Django.
-
-        :return: Cadena de texto con nombre del estado del ticket.
-        """
-        return self.nombre
 
 
 class ImagenTicket(models.Model):
@@ -544,6 +549,8 @@ class Etiqueta(models.Model):
     El modelo Etiqueta es una representación que conserva las etiquetas del modelo :class:`Ticket` y :class:`Mensaje`.
 
     :param nombre: Campo de texto con el nombre de la etiqueta (largo máximo: 50 caracteres, único).
+    :param nivel_severidad: Campo de texto con el nivel de severidad de la etiqueta (largo máximo: 50 caracteres, único,
+        incluye opciones).
     :param tickets: Clave foránea al modelo :class:`Ticket` (relación muchos a muchos).
     :param mensajes: Clave foránea al modelo :class:`Mensaje` (relación muchos a muchos).
 
@@ -579,9 +586,16 @@ class Etiqueta(models.Model):
         etiqueta_elegida.save()
 
     """
+    class NivelSeveridad(models.TextChoices):
+        INFO = 'info', _('Informativo')
+        SUCCESS = 'success', _('Positivo')
+        WARNING = 'warning', _('Precaución')
+        DANGER = 'danger', _('Peligro')
+
     nombre = models.CharField(max_length=50, unique=True)
-    tickets = models.ManyToManyField('Ticket')
-    mensajes = models.ManyToManyField('Mensaje')
+    nivel_severidad = models.CharField(max_length=50, choices=NivelSeveridad.choices, default=NivelSeveridad.INFO)
+    tickets = models.ManyToManyField('Ticket', blank=True)
+    mensajes = models.ManyToManyField('Mensaje', blank=True)
 
     def __str__(self):
         """

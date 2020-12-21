@@ -52,7 +52,7 @@ lista_modelos = [
     Ticket,
     Prioridad,
     TipoTicket,
-    EstadoTicket,
+    EtapaTicket,
     ImagenTicket,
     Mensaje,
     ImagenMensaje,
