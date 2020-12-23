@@ -10,8 +10,12 @@ django-environ = "==0.4.5"
 pillow = "==8.0.1"
 django-field-history = "==0.8.0"
 sphinx = "==3.3.1"
+gunicorn = "==20.0.4"
+djangorestframework = "==3.12.2"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
+httpie = "*"
 
 [requires]
 python_version = "3.9"

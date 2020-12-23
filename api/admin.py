@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from api.models_dir import *
+from api.models import *
 
 lista_modelos = [
     # Colaborador

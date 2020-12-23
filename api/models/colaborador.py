@@ -90,7 +90,7 @@ class Colaborador(models.Model):
     fecha_defuncion = models.DateField('fecha de defunción', blank=True, null=True)
     sexo = models.ForeignKey('Sexo', on_delete=models.CASCADE)
     estado_civil = models.ForeignKey('EstadoCivil', on_delete=models.CASCADE)
-    nacionalidad = models.ForeignKey('Nacionalidad', on_delete=models.CASCADE)
+    nacionalidad = models.ForeignKey('Nacionalidad', on_delete=models.CASCADE, default=1)
     direccion = models.CharField('dirección', max_length=200, blank=True, null=True)
     comuna = models.ForeignKey('Comuna', on_delete=models.CASCADE)
     telefono_fijo = models.CharField('teléfono fijo', max_length=20, blank=True, null=True)

@@ -1,0 +1,436 @@
+[
+  {
+    "model": "api.sexo",
+    "pk": 1,
+    "fields": {
+      "nombre": "Masculino"
+    }
+  },
+  {
+    "model": "api.sexo",
+    "pk": 2,
+    "fields": {
+      "nombre": "Femenino"
+    }
+  },
+  {
+    "model": "api.sexo",
+    "pk": 3,
+    "fields": {
+      "nombre": "Intersex"
+    }
+  },
+  {
+    "model": "api.sexo",
+    "pk": 4,
+    "fields": {
+      "nombre": "Otro"
+    }
+  },
+  {
+    "model": "api.estadocivil",
+    "pk": 1,
+    "fields": {
+      "nombre": "Soltero/a"
+    }
+  },
+  {
+    "model": "api.estadocivil",
+    "pk": 2,
+    "fields": {
+      "nombre": "Casado/a"
+    }
+  },
+  {
+    "model": "api.estadocivil",
+    "pk": 3,
+    "fields": {
+      "nombre": "Viudo/a"
+    }
+  },
+  {
+    "model": "api.estadocivil",
+    "pk": 4,
+    "fields": {
+      "nombre": "Divorciado/a"
+    }
+  },
+  {
+    "model": "api.estadocivil",
+    "pk": 5,
+    "fields": {
+      "nombre": "Conviviente civil"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 1,
+    "fields": {
+      "nombre": "Chilena"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 2,
+    "fields": {
+      "nombre": "Argentina"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 3,
+    "fields": {
+      "nombre": "Boliviana"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 4,
+    "fields": {
+      "nombre": "Brasileña"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 5,
+    "fields": {
+      "nombre": "Colombiana"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 6,
+    "fields": {
+      "nombre": "Ecuatoriana"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 7,
+    "fields": {
+      "nombre": "Guyanesa"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 8,
+    "fields": {
+      "nombre": "Paraguaya"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 9,
+    "fields": {
+      "nombre": "Peruana"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 10,
+    "fields": {
+      "nombre": "Surinamés"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 11,
+    "fields": {
+      "nombre": "Uruguaya"
+    }
+  },
+  {
+    "model": "api.nacionalidad",
+    "pk": 12,
+    "fields": {
+      "nombre": "Venezolana"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 1,
+    "fields": {
+      "nombre": "Java"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 2,
+    "fields": {
+      "nombre": "C/C++"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 3,
+    "fields": {
+      "nombre": "Python"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 4,
+    "fields": {
+      "nombre": "C#"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 5,
+    "fields": {
+      "nombre": "Visual Basic .NET"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 6,
+    "fields": {
+      "nombre": "SQL"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 7,
+    "fields": {
+      "nombre": "PHP"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 8,
+    "fields": {
+      "nombre": "Ruby"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 9,
+    "fields": {
+      "nombre": "R"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 10,
+    "fields": {
+      "nombre": "Rust"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 11,
+    "fields": {
+      "nombre": "TypeScript"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 12,
+    "fields": {
+      "nombre": "Swift"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 13,
+    "fields": {
+      "nombre": "Perl"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 14,
+    "fields": {
+      "nombre": "Go"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 15,
+    "fields": {
+      "nombre": "Kotlin"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 16,
+    "fields": {
+      "nombre": "Scheme"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 17,
+    "fields": {
+      "nombre": "Erlang"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 18,
+    "fields": {
+      "nombre": "Elixir"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 19,
+    "fields": {
+      "nombre": "Pascal"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 20,
+    "fields": {
+      "nombre": "Postscript"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 21,
+    "fields": {
+      "nombre": "Haskell"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 22,
+    "fields": {
+      "nombre": "Objective-C"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 23,
+    "fields": {
+      "nombre": "Scala"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 24,
+    "fields": {
+      "nombre": "Lava"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 25,
+    "fields": {
+      "nombre": "React"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 26,
+    "fields": {
+      "nombre": "ASP.NET"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 27,
+    "fields": {
+      "nombre": "Angular"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 28,
+    "fields": {
+      "nombre": "Ruby on Rails"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 29,
+    "fields": {
+      "nombre": "Vue.js"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 30,
+    "fields": {
+      "nombre": "Django"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 31,
+    "fields": {
+      "nombre": "Laravel"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 32,
+    "fields": {
+      "nombre": "Express"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 33,
+    "fields": {
+      "nombre": "CodeIgniter"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 34,
+    "fields": {
+      "nombre": "Ember"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 35,
+    "fields": {
+      "nombre": "Spring"
+    }
+  },
+  {
+    "model": "api.skill",
+    "pk": 36,
+    "fields": {
+      "nombre": "Node.js"
+    }
+  },
+  {
+    "model": "api.nivelskill",
+    "pk": 1,
+    "fields": {
+      "nombre": "Principiante"
+    }
+  },
+  {
+    "model": "api.nivelskill",
+    "pk": 2,
+    "fields": {
+      "nombre": "Promedio"
+    }
+  },
+  {
+    "model": "api.nivelskill",
+    "pk": 3,
+    "fields": {
+      "nombre": "Hábil"
+    }
+  },
+  {
+    "model": "api.nivelskill",
+    "pk": 4,
+    "fields": {
+      "nombre": "Especialista"
+    }
+  },
+  {
+    "model": "api.nivelskill",
+    "pk": 5,
+    "fields": {
+      "nombre": "Experto"
+    }
+  }
+]
