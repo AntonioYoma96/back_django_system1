@@ -41,6 +41,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
+        extra_fields.setdefault('is_verified', True)
         if extra_fields.get('is_staff') is not True:
             raise ValueError(_('Superuser must have is_staff=True'))
         if extra_fields.get('is_superuser') is not True:
@@ -66,6 +67,11 @@ class CustomUser(AbstractUser):
     first_name = None
     last_name = None
     email = models.EmailField(_('email address'), unique=True)
+    is_verified = models.BooleanField(
+        _('verificado'),
+        default=False,
+        help_text=_('indica si el usuario ha verificado el email.')
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

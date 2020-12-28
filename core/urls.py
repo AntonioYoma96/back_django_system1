@@ -15,6 +15,8 @@ urlpatterns = [
     path('auth/token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     # Auth
-    path('auth/register/', views.RegisterView.as_view(), name='api-register'),
-    path('auth/change-password/<int:pk>/', views.ChangePasswordView.as_view(), name='api-change-password'),
+    path('auth/register/', views.RegisterView.as_view(), name='auth-register'),
+    path('auth/email-verify/', views.VerifyEmailView.as_view(), name='auth-email-verify'),
+    path('auth/email-verify-resend/', views.ResendEmailConfirmationView.as_view(), name='auth-email-verify-resend'),
+    path('auth/change-password/<int:pk>/', views.ChangePasswordView.as_view(), name='auth-change-password'),
 ]
