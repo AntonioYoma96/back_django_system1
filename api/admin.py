@@ -50,6 +50,7 @@ lista_modelos = [
     Modulo,
     # Ticket
     Ticket,
+    TicketLog,
     Prioridad,
     TipoTicket,
     EtapaTicket,

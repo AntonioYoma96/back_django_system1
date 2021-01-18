@@ -86,6 +86,7 @@
     "fields": {
       "nombre": "Revisión",
       "tipo": null,
+      "dificultad": null,
       "rev_min": null,
       "rev_max": null,
       "dev_min": null,
@@ -97,7 +98,8 @@
     "pk": 2,
     "fields": {
       "nombre": "Desarrollo",
-      "tipo": "Simple - Corto",
+      "tipo": "Simple",
+      "dificultad": "Corto",
       "rev_min": 20,
       "rev_max": 30,
       "dev_min": 60,
@@ -109,7 +111,8 @@
     "pk": 3,
     "fields": {
       "nombre": "Desarrollo",
-      "tipo": "Simple - Largo",
+      "tipo": "Simple",
+      "dificultad": "Largo",
       "rev_min": 45,
       "rev_max": 90,
       "dev_min": 300,
@@ -121,7 +124,8 @@
     "pk": 4,
     "fields": {
       "nombre": "Desarrollo",
-      "tipo": "Complejidad - Media",
+      "tipo": "Complejidad",
+      "dificultad": "Media",
       "rev_min": 45,
       "rev_max": 120,
       "dev_min": 720,
@@ -133,7 +137,8 @@
     "pk": 5,
     "fields": {
       "nombre": "Desarrollo",
-      "tipo": "Complejidad - Alta",
+      "tipo": "Complejidad",
+      "dificultad": "Alta",
       "rev_min": 90,
       "rev_max": 300,
       "dev_min": 1440,
@@ -146,6 +151,7 @@
     "fields": {
       "nombre": "Validación",
       "tipo": null,
+      "dificultad": null,
       "rev_min": null,
       "rev_max": null,
       "dev_min": null,
@@ -158,6 +164,7 @@
     "fields": {
       "nombre": "Finalización",
       "tipo": null,
+      "dificultad": null,
       "rev_min": null,
       "rev_max": null,
       "dev_min": null,

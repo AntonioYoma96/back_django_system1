@@ -9,6 +9,12 @@ class TicketSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class TicketLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.TicketLog
+        fields = '__all__'
+
+
 class PrioridadSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Prioridad

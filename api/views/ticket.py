@@ -8,6 +8,11 @@ class TicketViewSet(viewsets.ModelViewSet):
     queryset = models.Ticket.objects.all()
 
 
+class TicketLogViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.TicketLogSerializer
+    queryset = models.TicketLog.objects.all()
+
+
 class PrioridadViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.PrioridadSerializer
     queryset = models.Prioridad.objects.all()

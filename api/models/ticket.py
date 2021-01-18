@@ -3,7 +3,6 @@ from datetime import datetime
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from field_history.tracker import FieldHistoryTracker
 
 
 def get_image_ticket_path(instance, filename):
@@ -131,13 +130,13 @@ class Ticket(models.Model):
 
     """
     asignado = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_asignado')
-    solicitante = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_solicitado')
+    solicitante = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_solicitante')
     validador = models.ForeignKey(
         'Colaborador',
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        related_name='ticket_validar'
+        related_name='ticket_validador'
     )
     origen = models.ForeignKey('Origen', on_delete=models.CASCADE)
     modulo = models.ForeignKey('Modulo', on_delete=models.CASCADE, verbose_name='módulo')
@@ -148,11 +147,9 @@ class Ticket(models.Model):
     ruta = models.URLField(blank=True, null=True)
     asunto = models.CharField(max_length=100)
     descripcion = models.TextField('descripción')
-    etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='estado del ticket')
+    etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='etapa del ticket')
     created = models.DateTimeField('creado', auto_now_add=True)
     modified = models.DateTimeField('modificado', auto_now=True)
-
-    historial = FieldHistoryTracker(['asignado', 'estado_ticket'])
 
     def __str__(self):
         """
@@ -162,6 +159,26 @@ class Ticket(models.Model):
         :return: Cadena de texto con ID y asunto del ticket, y el nombre de la etapa del ticket.
         """
         return f'{self.id} - {self.asunto[:50]} - {self.etapa_ticket.nombre}'
+
+
+class TicketLog(models.Model):
+    ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE)
+    asignado = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_log_asignado')
+    etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='etapa del ticket')
+    inicio_etapa = models.DateTimeField('inicio de etapa', auto_now_add=True)
+    fin_etapa = models.DateTimeField('fin de etapa')
+
+    class Meta:
+        verbose_name = 'historial del ticket'
+        verbose_name_plural = 'historiales de los tickets'
+
+    def __str__(self):
+        return 'Ticket {} - {} -{}{}'.format(
+            self.ticket.id,
+            self.etapa_ticket.nombre,
+            self.inicio_etapa,
+            f' - {self.fin_etapa}' if self.fin_etapa else ''
+        )
 
 
 class Prioridad(models.Model):
@@ -317,10 +334,11 @@ class EtapaTicket(models.Model):
     """
     nombre = models.CharField(max_length=50)
     tipo = models.CharField(max_length=50, blank=True, null=True)
+    dificultad = models.CharField(max_length=50, blank=True, null=True)
     rev_min = models.PositiveSmallIntegerField('tiempo mínimo de revisión', blank=True, null=True)
     rev_max = models.PositiveSmallIntegerField('tiempo máximo de revisión', blank=True, null=True)
     dev_min = models.PositiveSmallIntegerField('tiempo mínimo de desarrollo', blank=True, null=True)
-    dev_mx = models.PositiveSmallIntegerField('tiempo máximo de desarrollo', blank=True, null=True)
+    dev_max = models.PositiveSmallIntegerField('tiempo máximo de desarrollo', blank=True, null=True)
 
     class Meta:
         """
@@ -334,7 +352,7 @@ class EtapaTicket(models.Model):
         verbose_name = 'etapa del ticket'
         verbose_name_plural = 'etapas de los tickets'
         constraints = [
-            models.UniqueConstraint(fields=['nombre', 'tipo'], name='unique_etapa_tipo_ticket')
+            models.UniqueConstraint(fields=['nombre', 'tipo', 'dificultad'], name='unique_etapa_tipo')
         ]
 
     def __str__(self):
@@ -344,9 +362,10 @@ class EtapaTicket(models.Model):
 
         :return: Cadena de texto con nombre de la etapa del ticket, y su tipo si lo incluye.
         """
-        return '{}{}'.format(
+        return '{}{}{}'.format(
             self.nombre,
-            f' - {self.tipo}' if self.tipo else ""
+            f' - {self.tipo}' if self.tipo else "",
+            f' - {self.dificultad}' if self.tipo else ""
         )
 
 
@@ -586,6 +605,7 @@ class Etiqueta(models.Model):
         etiqueta_elegida.save()
 
     """
+
     class NivelSeveridad(models.TextChoices):
         INFO = 'info', _('Informativo')
         SUCCESS = 'success', _('Positivo')

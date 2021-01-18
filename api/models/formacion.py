@@ -427,7 +427,7 @@ class OtroFormacion(models.Model):
     """
     colaborador = models.ForeignKey('Colaborador', on_delete=models.CASCADE)
     institucion = models.ForeignKey('Institucion', on_delete=models.CASCADE, verbose_name='institución')
-    tipo_otra_formacion = models.ForeignKey(
+    tipo_otro_formacion = models.ForeignKey(
         'TipoOtroFormacion',
         on_delete=models.CASCADE,
         verbose_name='tipo otro de formación'
