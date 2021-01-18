@@ -24,14 +24,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party apps
-    'field_history',
     'rest_framework',
+    'drf_yasg',
+    'corsheaders',
     # Project apps
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
+    # CORS Middleware
+    'corsheaders.middleware.CorsMiddleware',
     # Django middlewares
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -133,3 +136,8 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
+
+# CORS configurations
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200"
+]
