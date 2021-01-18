@@ -51,6 +51,7 @@ router.register(r'organizacion/niveles-responsabilidad', views.NivelResponsabili
 router.register(r'organizacion/centros-costo', views.CentroCostoViewSet)
 # Ticket
 router.register(r'ticket/tickets', views.TicketViewSet)
+router.register(r'ticket/tickets-logs', views.TicketLogViewSet)
 router.register(r'ticket/prioridades', views.PrioridadViewSet)
 router.register(r'ticket/tipos-ticket', views.TipoTicketViewSet)
 router.register(r'ticket/etapas-ticket', views.EtapaTicketViewSet)
