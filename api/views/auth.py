@@ -1,6 +1,7 @@
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_decode
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils.encoding import force_str, smart_bytes
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import generics, status
 from rest_framework.exceptions import AuthenticationFailed
@@ -76,16 +77,21 @@ class ResendEmailConfirmationView(generics.GenericAPIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        data = {
-            'email': request.data['email'],
-            'request': request
-        }
-        serializer = self.serializer_class(data=data)
-        serializer.is_valid(raise_exception=True)
-        return Response(
-            {'message': _('Nueva validación de correo enviada correctamente')},
-            status=status.HTTP_202_ACCEPTED
-        )
+        try:
+            serializer = self.serializer_class(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            user = CustomUser.objects.get(email=request.data['email'])
+            token = RefreshToken.for_user(user)
+            Utils(request).validate_email_registration(user.email, token)
+            return Response(
+                {'message': _('Nueva validación de correo enviada correctamente')},
+                status=status.HTTP_202_ACCEPTED
+            )
+        except ObjectDoesNotExist:
+            return Response(
+                {'error': _('El correo electrónico no se encuentra en la base de datos')},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
 
 
 class ResetPasswordRequestView(generics.GenericAPIView):
@@ -93,19 +99,26 @@ class ResetPasswordRequestView(generics.GenericAPIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        data = {
-            'email': request.data['email'],
-            'request': request
-        }
-        serializer = self.serializer_class(data=data)
-        serializer.is_valid(raise_exception=True)
-        return Response(
-            {'message': _('Email con instrucciones de cambio de contraseña enviado correctamente')},
-            status=status.HTTP_202_ACCEPTED
-        )
+        serializer = self.serializer_class(data=request.data)
+        try:
+            serializer.is_valid(raise_exception=True)
+            user = CustomUser.objects.get(email=request.data["email"])
+            uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
+            token = PasswordResetTokenGenerator().make_token(user)
+            name = user.colaborador.nombre if hasattr(user, 'colaborador') else ''
+            Utils(request).reset_password(user.email, uidb64, token, name)
+            return Response(
+                {'message': _('Email con instrucciones de cambio de contraseña enviado correctamente')},
+                status=status.HTTP_202_ACCEPTED
+            )
+        except ObjectDoesNotExist:
+            return Response(
+                {'error': _('El correo electrónico entregado no existe en la base de datos')},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
 
 
-class ResetPasswordView(APIView):
+class ResetPasswordView(generics.GenericAPIView):
     serializer_class = serializers.ResetPasswordSerializer
     permission_classes = [AllowAny]
 

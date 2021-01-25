@@ -36,7 +36,7 @@ class Utils:
                     protocol='https' if is_secure else 'http',
                     domain=self.current_site.domain,
                     # Cambiar path al de la vista
-                    path=reverse('auth-reset-password'),
+                    path='somePath',
                     uidb64=uidb64,
                     token=token
                 ),

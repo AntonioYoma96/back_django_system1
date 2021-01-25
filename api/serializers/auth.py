@@ -1,15 +1,10 @@
 from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.encoding import smart_bytes
-from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
 
 from api.models import Colaborador
-from api.utils import Utils
+from api.serializers import ColaboradorSerializer
 from users.models import CustomUser
 
 
@@ -95,45 +90,40 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         return instance
 
 
-class ResendEmailConfirmationSerializer(serializers.ModelSerializer):
+class ResendEmailConfirmationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def update(self, instance, validated_data):
+        pass
+
+    def create(self, validated_data):
+        pass
+
     class Meta:
-        model = CustomUser
         fields = ['email']
 
-    def validate(self, attrs):
-        try:
-            user = CustomUser.objects.get(email=attrs['email'])
-            token = RefreshToken.for_user(user)
-            Utils(attrs['request']).validate_email_registration(user.email, token)
-            return attrs
-        except ObjectDoesNotExist:
-            raise serializers.ValidationError({'email': _('El correo electrónico no se encuentra en la base de datos')})
 
+class ResetPasswordRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
 
-class ResetPasswordRequestSerializer(serializers.ModelSerializer):
+    def update(self, instance, validated_data):
+        pass
+
+    def create(self, validated_data):
+        pass
+
     class Meta:
-        model = CustomUser
         fields = ['email']
-
-    def validate(self, attrs):
-        try:
-            user = CustomUser.objects.get(email=attrs['email'])
-            uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
-            token = PasswordResetTokenGenerator().make_token(user)
-            name = user.colaborador.nombre if hasattr(user, 'colaborador') else ''
-            Utils(attrs['request']).reset_password(user.email, uidb64, token, name)
-            return attrs
-        except ObjectDoesNotExist:
-            raise serializers.ValidationError({'email': _('El correo electrónico no se encuentra en la base de datos')})
 
 
 class ResetPasswordSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = CustomUser
-        fields = ['password', 'password2']
+        fields = ['user_id', 'password', 'password2']
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -154,7 +144,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
 
-        # data.update({'user_id': self.user.id})
         data.update({'user_email': self.user.email})
+        colaborador = Colaborador.objects.get(usuario_id=self.user.id)
+        colaborador_serializer = ColaboradorSerializer(colaborador)
+        data.update({'colaborador': colaborador_serializer.data})
 
         return data
