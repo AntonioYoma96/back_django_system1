@@ -1,3 +1,4 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
 from api import serializers, models
@@ -26,6 +27,18 @@ class TipoTicketViewSet(viewsets.ModelViewSet):
 class EtapaTicketViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.EtapaTicketSerializer
     queryset = models.EtapaTicket.objects.all()
+
+
+class AreaTicketViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.AreaTicketSerializer
+    queryset = models.AreaTicket.objects.all()
+
+
+class DificultadTicketViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.DificultadTicketSerializer
+    queryset = models.DificultadTicket.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['area_ticket']
 
 
 class ImagenTicketViewSet(viewsets.ModelViewSet):

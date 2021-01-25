@@ -84,91 +84,108 @@
     "model": "api.etapaticket",
     "pk": 1,
     "fields": {
-      "nombre": "Revisión",
-      "tipo": null,
-      "dificultad": null,
-      "rev_min": null,
-      "rev_max": null,
-      "dev_min": null,
-      "dev_mx": null
+      "nombre": "Revisión"
     }
   },
   {
     "model": "api.etapaticket",
     "pk": 2,
     "fields": {
-      "nombre": "Desarrollo",
-      "tipo": "Simple",
-      "dificultad": "Corto",
-      "rev_min": 20,
-      "rev_max": 30,
-      "dev_min": 60,
-      "dev_mx": 240
+      "nombre": "Desarrollo"
     }
   },
   {
     "model": "api.etapaticket",
     "pk": 3,
     "fields": {
-      "nombre": "Desarrollo",
-      "tipo": "Simple",
-      "dificultad": "Largo",
-      "rev_min": 45,
-      "rev_max": 90,
-      "dev_min": 300,
-      "dev_mx": 1200
+      "nombre": "Validación"
     }
   },
   {
     "model": "api.etapaticket",
     "pk": 4,
     "fields": {
-      "nombre": "Desarrollo",
+      "nombre": "Finalización"
+    }
+  },
+  {
+    "model": "api.areaticket",
+    "pk": 1,
+    "fields": {
+      "nombre": "Sin asignar"
+    }
+  },
+  {
+    "model": "api.areaticket",
+    "pk": 2,
+    "fields": {
+      "nombre": "Proyectos"
+    }
+  },
+  {
+    "model": "api.areaticket",
+    "pk": 3,
+    "fields": {
+      "nombre": "Desarrollo"
+    }
+  },
+  {
+    "model": "api.areaticket",
+    "pk": 4,
+    "fields": {
+      "nombre": "TI"
+    }
+  },
+  {
+    "model": "api.dificultadticket",
+    "pk": 1,
+    "fields": {
+      "tipo": "Simple",
+      "nivel": "Corto",
+      "rev_min": 0.3,
+      "rev_max": 0.5,
+      "dev_min": 1.0,
+      "dev_max": 4.0,
+      "area_ticket": 3
+    }
+  },
+  {
+    "model": "api.dificultadticket",
+    "pk": 2,
+    "fields": {
+      "tipo": "Simple",
+      "nivel": "Largo",
+      "rev_min": 0.75,
+      "rev_max": 1.5,
+      "dev_min": 5.0,
+      "dev_max": 12.0,
+      "area_ticket": 3
+    }
+  },
+  {
+    "model": "api.dificultadticket",
+    "pk": 3,
+    "fields": {
       "tipo": "Complejidad",
-      "dificultad": "Media",
-      "rev_min": 45,
-      "rev_max": 120,
-      "dev_min": 720,
-      "dev_mx": 1800
+      "nivel": "Media",
+      "rev_min": 0.75,
+      "rev_max": 2.0,
+      "dev_min": 12.0,
+      "dev_max": 30.0,
+      "area_ticket": 3
     }
   },
   {
-    "model": "api.etapaticket",
-    "pk": 5,
+    "model": "api.dificultadticket",
+    "pk": 4,
     "fields": {
-      "nombre": "Desarrollo",
       "tipo": "Complejidad",
-      "dificultad": "Alta",
-      "rev_min": 90,
-      "rev_max": 300,
-      "dev_min": 1440,
-      "dev_mx": 3600
-    }
-  },
-  {
-    "model": "api.etapaticket",
-    "pk": 6,
-    "fields": {
-      "nombre": "Validación",
-      "tipo": null,
-      "dificultad": null,
-      "rev_min": null,
-      "rev_max": null,
-      "dev_min": null,
-      "dev_mx": null
-    }
-  },
-  {
-    "model": "api.etapaticket",
-    "pk": 7,
-    "fields": {
-      "nombre": "Finalización",
-      "tipo": null,
-      "dificultad": null,
-      "rev_min": null,
-      "rev_max": null,
-      "dev_min": null,
-      "dev_mx": null
+      "nivel": "Alta",
+      "rev_min": 1.5,
+      "rev_max": 5.0,
+      "dev_min": 24.0,
+      "dev_max": 60.0,
+      "area_ticket": 3
     }
   },
   {

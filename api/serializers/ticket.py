@@ -33,6 +33,30 @@ class EtapaTicketSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AreaTicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.AreaTicket
+        fields = '__all__'
+
+
+class DificultadTicketSerializer(serializers.ModelSerializer):
+    full_dificultad = serializers.ReadOnlyField()
+
+    class Meta:
+        model = models.DificultadTicket
+        fields = [
+            'id',
+            'tipo',
+            'nivel',
+            'rev_min',
+            'rev_max',
+            'dev_min',
+            'dev_max',
+            'area_ticket',
+            'full_dificultad',
+        ]
+
+
 class ImagenTicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ImagenTicket

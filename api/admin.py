@@ -54,6 +54,8 @@ lista_modelos = [
     Prioridad,
     TipoTicket,
     EtapaTicket,
+    AreaTicket,
+    DificultadTicket,
     ImagenTicket,
     Mensaje,
     ImagenMensaje,

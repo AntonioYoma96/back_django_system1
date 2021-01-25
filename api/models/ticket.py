@@ -53,82 +53,6 @@ def new_filename(base_path, file):
 
 
 class Ticket(models.Model):
-    """
-    El modelo Ticket representa cualquier tipo de solicitud o incidencia que pueden generarse entre las entidades del
-    modelo :class:`Colaborador`. Por lo tanto este modelo está asociado a los modelos :class:`Colaborador` como
-    solicitante, receptor y validador, :class:`Origen`, :class:`Modulo`, :class:`Prioridad`, :class:`TipoTicket` y
-    :class:`EtapaTicket` para una mejor comprensión.
-
-    Además cuenta con un parámetro especial para el registro de historial del modelo Ticket basado en la aplicación
-    **django-field-history**.
-
-    :param asignado: Clave foránea al modelo :class:`Colaborador` como colaborador asignado.
-    :param solicitante: Clave foránea al modelo :class:`Colaborador` como colaborador solicitante.
-    :param validador: Clave foránea al modelo :class:`Colaborador` como colaborador validador (opcional).
-    :param origen: Clave foránea al modelo :class:`Origen`.
-    :param modulo: Clave foránea al modelo :class:`Modulo`.
-    :param version: Campo de texto para la versión del sistema que originó el ticket (largo máximo: 10 caracteres,
-        opcional).
-    :param prioridad: Clave foránea al modelo :class:`Prioridad`.
-    :param tipo_ticket: Clave foránea al modelo :class:`TipoTicket`.
-    :param fecha_limite: Campo de fecha para la fecha límite de revisión del ticket (opcional).
-    :param ruta: Campo de texto para la ruta del origen del problema a solucionar en el ticket (con validación
-        de enlaces, opcional).
-    :param asunto: Campo de texto para el asunto del ticket (largo máximo: 100 caracteres).
-    :param descripcion: Campo de texto para la descripcion del ticket.
-    :param estado_ticket: Clave foránea al modelo :class:`EtapaTicket`.
-    :param created: Campo de fecha y hora de la fecha de creación del colaborador (Auto generado).
-    :param modified: Campo de fecha y hora de la última fecha de modificación del colaborador (Auto generado).
-    :param historial: Campo especial heredado de la clase :class:`field_history.tracker.FieldHistoryTracker` de la
-        aplicación **django-field-history**. Lleva control de los parámetros :py:attr:`asignado` y
-        :py:attr:`estado_ticket`
-
-    **Ejemplos de uso**
-
-    Para su creación se necesita de los campos :class:`Colaborador`, :class:`Origen`, :class:`Modulo`,
-    :class:`Prioridad`, :class:`TipoTicket` y :class:`EtapaTicket` con datos en el sistema, y se usan los siguientes
-    pasos:
-
-    *Creación de Ticket*
-
-    Ejemplo:
-    ::
-        # Valores de claves foráneas
-        asignado_elegido = Colaborador.objects.get(pk=1)
-        solicitante_elegido = Colaborador.objects.get(pk=1)
-        origen_elegido = Origen.objects.get(pk=1)
-        modulo_elegido = Modulo.objects.get(pk=1)
-        prioridad_elegida = Prioridad.objects.get(pk=1)
-        tipo_ticket_elegido = TipoTicket.objects.get(pk=1)
-        etapa_ticket_elegido = EtapaTicket.objects.get(pk=1)
-
-        # Creación de la nueva Ticket
-        nuevo_ticket = Ticket.objects.create(
-            asignado=asignado_elegido,
-            solicitante=solicitante_elegido,
-            origen=origen_elegido,
-            modulo=modulo_elegido,
-            prioridad=prioridad_elegida,
-            tipo_ticket=tipo_ticket_elegido,
-            asunto='Botón deshabilitado',
-            descripcion='El botón se encuentra deshabilitado, y no se puede imprimir reportes',
-            etapa_ticket=etapa_ticket_elegido
-        )
-
-    *Actualización del modelo Ticket*
-
-    Ejemplo:
-    ::
-        # Obtener Ticket existente
-        ticket_elegido = Ticket.objects.get(pk=1)
-
-        # Generar cambios al ticket obtenido
-        ticket_elegido.asunto = 'Botón desaparecido'
-
-        # Guardando cambios hechos
-        ticket_elegido.save()
-
-    """
     asignado = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_asignado')
     solicitante = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_solicitante')
     validador = models.ForeignKey(
@@ -148,16 +72,12 @@ class Ticket(models.Model):
     asunto = models.CharField(max_length=100)
     descripcion = models.TextField('descripción')
     etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='etapa del ticket')
+    dificultad_ticket = models.ForeignKey('DificultadTicket', on_delete=models.CASCADE,
+                                          verbose_name='dificultad del ticket', blank=True, null=True)
     created = models.DateTimeField('creado', auto_now_add=True)
     modified = models.DateTimeField('modificado', auto_now=True)
 
     def __str__(self):
-        """
-        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
-        funciones de Django.
-
-        :return: Cadena de texto con ID y asunto del ticket, y el nombre de la etapa del ticket.
-        """
         return f'{self.id} - {self.asunto[:50]} - {self.etapa_ticket.nombre}'
 
 
@@ -165,19 +85,21 @@ class TicketLog(models.Model):
     ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE)
     asignado = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_log_asignado')
     etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='etapa del ticket')
-    inicio_etapa = models.DateTimeField('inicio de etapa', auto_now_add=True)
-    fin_etapa = models.DateTimeField('fin de etapa')
+    dificultad_ticket = models.ForeignKey('DificultadTicket', on_delete=models.CASCADE,
+                                          verbose_name='dificultad del ticket')
+    inicio_area = models.DateTimeField('inicio de etapa', auto_now_add=True)
+    fin_area = models.DateTimeField('fin de etapa')
 
     class Meta:
         verbose_name = 'historial del ticket'
         verbose_name_plural = 'historiales de los tickets'
 
     def __str__(self):
-        return 'Ticket {} - {} -{}{}'.format(
+        return 'Ticket {} - {} - {}{}'.format(
             self.ticket.id,
             self.etapa_ticket.nombre,
-            self.inicio_etapa,
-            f' - {self.fin_etapa}' if self.fin_etapa else ''
+            self.inicio_area,
+            f' - {self.fin_area}' if self.fin_area else ''
         )
 
 
@@ -293,79 +215,52 @@ class TipoTicket(models.Model):
 
 
 class EtapaTicket(models.Model):
-    """
-    El modelo EtapaTicket es una representación de los estados de ticket que se pueden poseer en el modelo
-    :class:`Ticket`.
-
-    :param nombre: Campo de texto con el nombre de la etapa del ticket (largo máximo: 50 caracteres, único).
-    :param tipo: Campo de texto con la sub categorización de la etapa del ticket (largo máximo: 50 caracteres,
-        opcional).
-    :param rev_min: Campo numérico para la estimación mínima de revision del tipo de etapa (opcional).
-    :param rev_max: Campo numérico para la estimación máxima de revision del tipo de etapa (opcional).
-    :param dev_min: Campo numérico para la estimación mínima de desarrollo del tipo de etapa (opcional).
-    :param dev_mx: Campo numérico para la estimación máxima de desarrollo del tipo de etapa (opcional).
-
-    **Ejemplos de uso**
-
-    Para su creación se usan los siguientes pasos:
-
-    *Creación de EtapaTicket*
-
-    Ejemplo:
-    ::
-        # Creación de la nueva EtapaTicket
-        nuevo_etapa_ticket = EtapaTicket.objects.create(
-            nombre='Revisión'
-        )
-
-    *Actualización del modelo EtapaTicket*
-
-    Ejemplo:
-    ::
-        # Obtener EtapaTicket existente
-        etapa_ticket_elegido = EtapaTicket.objects.get(pk=1)
-
-        # Generar cambios al estado de ticket obtenido
-        etapa_ticket_elegido.nombre = 'Desarrollo'
-
-        # Guardando cambios hechos
-        etapa_ticket_elegido.save()
-
-    """
-    nombre = models.CharField(max_length=50)
-    tipo = models.CharField(max_length=50, blank=True, null=True)
-    dificultad = models.CharField(max_length=50, blank=True, null=True)
-    rev_min = models.PositiveSmallIntegerField('tiempo mínimo de revisión', blank=True, null=True)
-    rev_max = models.PositiveSmallIntegerField('tiempo máximo de revisión', blank=True, null=True)
-    dev_min = models.PositiveSmallIntegerField('tiempo mínimo de desarrollo', blank=True, null=True)
-    dev_max = models.PositiveSmallIntegerField('tiempo máximo de desarrollo', blank=True, null=True)
+    nombre = models.CharField(max_length=50, unique=True)
 
     class Meta:
-        """
-        Clase meta encargada de la información general para el funcionamiento en Django.
-
-        :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
-        :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
-        :param constraints: Lista de restricciones de clase :class:`django.models.UniqueConstraint` para restricciones
-            del modelo.
-        """
         verbose_name = 'etapa del ticket'
-        verbose_name_plural = 'etapas de los tickets'
-        constraints = [
-            models.UniqueConstraint(fields=['nombre', 'tipo', 'dificultad'], name='unique_etapa_tipo')
-        ]
+        verbose_name_plural = 'etapa de los tickets'
 
     def __str__(self):
-        """
-        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
-        funciones de Django.
+        return self.nombre
 
-        :return: Cadena de texto con nombre de la etapa del ticket, y su tipo si lo incluye.
-        """
-        return '{}{}{}'.format(
-            self.nombre,
-            f' - {self.tipo}' if self.tipo else "",
-            f' - {self.dificultad}' if self.tipo else ""
+
+class AreaTicket(models.Model):
+    nombre = models.CharField(max_length=50, unique=True)
+
+    class Meta:
+        verbose_name = 'área del ticket'
+        verbose_name_plural = 'áreas de los tickets'
+
+    def __str__(self):
+        return self.nombre
+
+
+class DificultadTicket(models.Model):
+    tipo = models.CharField(max_length=50)
+    nivel = models.CharField(max_length=50, blank=True, null=True)
+    rev_min = models.FloatField('tiempo mínimo de revisión', blank=True, null=True)
+    rev_max = models.FloatField('tiempo máximo de revisión', blank=True, null=True)
+    dev_min = models.FloatField('tiempo mínimo de desarrollo', blank=True, null=True)
+    dev_max = models.FloatField('tiempo máximo de desarrollo', blank=True, null=True)
+    area_ticket = models.ForeignKey('AreaTicket', on_delete=models.CASCADE, verbose_name='área del ticket')
+
+    class Meta:
+        verbose_name = 'dificultad de ticket'
+        verbose_name_plural = 'dificultades de los tickets'
+
+    def __str__(self):
+        return '{} - {}{}'.format(
+            self.area_ticket.nombre,
+            self.tipo,
+            f' - {self.nivel}' if self.nivel else ''
+        )
+
+    @property
+    def full_dificultad(self):
+        return '{}{}'.format(
+            self.tipo,
+            f' - {self.nivel}' if self.nivel else ''
         )
 
 

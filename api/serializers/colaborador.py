@@ -4,9 +4,33 @@ from api import models
 
 
 class ColaboradorSerializer(serializers.ModelSerializer):
+    full_name = serializers.ReadOnlyField()
+
     class Meta:
         model = models.Colaborador
-        fields = '__all__'
+        fields = [
+            "id",
+            "run",
+            "nombre",
+            "segundo_nombre",
+            "apellido_paterno",
+            "apellido_materno",
+            "fecha_nacimiento",
+            "fecha_defuncion",
+            "direccion",
+            "telefono_fijo",
+            "telefono_movil",
+            "email_personal",
+            "fecha_ingreso",
+            "created",
+            "modified",
+            "usuario",
+            "sexo",
+            "estado_civil",
+            "nacionalidad",
+            "comuna",
+            "full_name"
+        ]
 
 
 class SexoSerializer(serializers.ModelSerializer):
