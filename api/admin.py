@@ -56,9 +56,9 @@ lista_modelos = [
     EtapaTicket,
     AreaTicket,
     DificultadTicket,
-    ImagenTicket,
+    ArchivoTicket,
     Mensaje,
-    ImagenMensaje,
+    ArchivoMensaje,
     Etiqueta,
     Origen,
 ]

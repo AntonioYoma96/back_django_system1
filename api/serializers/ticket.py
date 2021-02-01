@@ -1,12 +1,7 @@
 from rest_framework import serializers
 
 from api import models
-
-
-class TicketSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Ticket
-        fields = '__all__'
+from api.serializers import ColaboradorSerializer, ModuloSerializer
 
 
 class TicketLogSerializer(serializers.ModelSerializer):
@@ -56,22 +51,37 @@ class DificultadTicketSerializer(serializers.ModelSerializer):
             'full_dificultad',
         ]
 
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['area_ticket'] = AreaTicketSerializer(instance.area_ticket).data
+        return response
 
-class ImagenTicketSerializer(serializers.ModelSerializer):
+
+class ArchivoTicketSerializer(serializers.ModelSerializer):
+    archivo = serializers.FileField()
+
     class Meta:
-        model = models.ImagenTicket
+        model = models.ArchivoTicket
         fields = '__all__'
 
 
 class MensajeSerializer(serializers.ModelSerializer):
+    autor = serializers.PrimaryKeyRelatedField(queryset=models.Colaborador.objects.all(), required=False,
+                                               allow_null=True)
+
     class Meta:
         model = models.Mensaje
         fields = '__all__'
 
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['autor'] = ColaboradorSerializer(instance.autor).data
+        return response
 
-class ImagenMensajeSerializer(serializers.ModelSerializer):
+
+class ArchivoMensajeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.ImagenMensaje
+        model = models.ArchivoMensaje
         fields = '__all__'
 
 
@@ -85,3 +95,23 @@ class OrigenSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Origen
         fields = '__all__'
+
+
+class TicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Ticket
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['asignado'] = ColaboradorSerializer(instance.asignado).data
+        response['solicitante'] = ColaboradorSerializer(instance.solicitante).data
+        response['validador'] = ColaboradorSerializer(instance.validador).data
+        response['origen'] = OrigenSerializer(instance.origen).data
+        response['modulo'] = ModuloSerializer(instance.modulo).data
+        response['prioridad'] = PrioridadSerializer(instance.prioridad).data
+        response['tipo_ticket'] = TipoTicketSerializer(instance.tipo_ticket).data
+        response['etapa_ticket'] = EtapaTicketSerializer(instance.etapa_ticket).data
+        if instance.dificultad_ticket:
+            response['dificultad_ticket'] = DificultadTicketSerializer(instance.dificultad_ticket).data
+        return response

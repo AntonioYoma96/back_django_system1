@@ -20,7 +20,7 @@ class ColaboradorSerializer(serializers.ModelSerializer):
             "direccion",
             "telefono_fijo",
             "telefono_movil",
-            "email_personal",
+            "correo_personal",
             "fecha_ingreso",
             "created",
             "modified",

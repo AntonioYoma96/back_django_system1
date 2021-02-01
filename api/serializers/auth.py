@@ -35,9 +35,9 @@ class FullRegisterSerializer(serializers.ModelSerializer):
         class Meta:
             model = Colaborador
             ref_name = 'FullRegisterColaborador'
-            fields = ['run', 'nombre', 'segundo_nombre', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento',
-                      'fecha_defuncion', 'sexo', 'estado_civil', 'nacionalidad', 'direccion', 'comuna', 'telefono_fijo',
-                      'telefono_movil', 'email_personal', 'fecha_ingreso']
+            fields = ['id', 'run', 'nombre', 'segundo_nombre', 'apellido_paterno', 'apellido_materno',
+                      'fecha_nacimiento', 'fecha_defuncion', 'sexo', 'estado_civil', 'nacionalidad', 'direccion',
+                      'comuna', 'telefono_fijo', 'telefono_movil', 'correo_personal', 'fecha_ingreso']
 
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)

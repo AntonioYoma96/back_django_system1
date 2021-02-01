@@ -1,5 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
 
 from api import serializers, models
 
@@ -41,19 +43,40 @@ class DificultadTicketViewSet(viewsets.ModelViewSet):
     filterset_fields = ['area_ticket']
 
 
-class ImagenTicketViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.ImagenTicketSerializer
-    queryset = models.ImagenTicket.objects.all()
+class ArchivoTicketViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.ArchivoTicketSerializer
+    queryset = models.ArchivoTicket.objects.all()
+    parser_classes = [MultiPartParser, FormParser]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class MensajeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MensajeSerializer
     queryset = models.Mensaje.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['ticket']
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        if 'autor' in data:
+            if not data['autor']:
+                data['autor'] = request.user.colaborador.id
+        else:
+            data['autor'] = request.user.colaborador.id
+        serializer = self.serializer_class(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-class ImagenMensajeViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.ImagenMensajeSerializer
-    queryset = models.ImagenMensaje.objects.all()
+class ArchivoMensajeViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.ArchivoMensajeSerializer
+    queryset = models.ArchivoMensaje.objects.all()
 
 
 class EtiquetaViewSet(viewsets.ModelViewSet):
