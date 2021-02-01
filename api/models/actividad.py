@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Actividad(models.Model):
@@ -60,14 +61,14 @@ class Actividad(models.Model):
 
     """
     colaborador = models.ForeignKey('Colaborador', on_delete=models.CASCADE)
-    fecha = models.DateField()
-    hora_inicio = models.TimeField('hora de inicio')
-    hora_termino = models.TimeField('hora de término', blank=True, null=True)
+    fecha = models.DateField(_('fecha'))
+    hora_inicio = models.TimeField(_('hora de inicio'))
+    hora_termino = models.TimeField(_('hora de término'), blank=True, null=True)
     datos_actividad = models.ForeignKey('DatosActividad', on_delete=models.CASCADE, verbose_name='datos de actividad')
     proyecto = models.ForeignKey('Proyecto', on_delete=models.CASCADE)
-    observaciones = models.TextField(blank=True, null=True)
-    created = models.DateTimeField('creado', auto_now_add=True)
-    modified = models.DateTimeField('modificado', auto_now=True)
+    observaciones = models.TextField(_('observaciones'), blank=True, null=True)
+    created = models.DateTimeField(_('creado'), auto_now_add=True)
+    modified = models.DateTimeField(_('modificado'), auto_now=True)
 
     class Meta:
         """
@@ -75,7 +76,8 @@ class Actividad(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'actividades'
+        verbose_name = _('actividad')
+        verbose_name_plural = _('actividades')
 
     def __str__(self):
         """
@@ -139,10 +141,10 @@ class DatosActividad(models.Model):
         # Guardando cambios hechos
         datos_actividad_elegida.save()
     """
-    nombre = models.CharField(max_length=50, unique=True)
-    descripcion = models.TextField('descripción', blank=True, null=True)
-    tiempo_maximo = models.SmallIntegerField('tiempo máximo', blank=True, null=True)
-    tiempo_minimo = models.SmallIntegerField('tiempo mínimo', blank=True, null=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
+    descripcion = models.TextField(_('descripcion'), blank=True, null=True)
+    tiempo_maximo = models.SmallIntegerField(_('tiempo_maximo'), blank=True, null=True)
+    tiempo_minimo = models.SmallIntegerField(_('tiempo_minimo'), blank=True, null=True)
     cargo = models.ForeignKey('Cargo', on_delete=models.CASCADE)
 
     class Meta:
@@ -152,8 +154,8 @@ class DatosActividad(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'datos de actividad'
-        verbose_name_plural = 'datos de actividades'
+        verbose_name = _('datos de actividad')
+        verbose_name_plural = _('datos de actividades')
 
     def __str__(self):
         """
@@ -206,9 +208,13 @@ class Proyecto(models.Model):
         # Guardando cambios hechos
         proyecto_elegido.save()
     """
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(_('nombre'), max_length=100)
     cliente = models.ForeignKey('Cliente', on_delete=models.CASCADE)
-    repositorio = models.URLField(blank=True, null=True)
+    repositorio = models.URLField(_('repositorio'), blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('proyecto')
+        verbose_name_plural = _('proyectos')
 
     def __str__(self):
         """
@@ -252,7 +258,11 @@ class Cliente(models.Model):
         # Guardando cambios hechos
         cliente_elegido.save()
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = _('cliente')
+        verbose_name_plural = _('clientes')
 
     def __str__(self):
         """
@@ -324,12 +334,12 @@ class MesaAyuda(models.Model):
     actividad = models.OneToOneField('Actividad', on_delete=models.CASCADE)
     tipo_soporte = models.ForeignKey('TipoSoporte', on_delete=models.CASCADE)
     modulo = models.ForeignKey('Modulo', on_delete=models.CASCADE, verbose_name='módulo')
-    funcionario = models.CharField(max_length=200)
-    telefono = models.CharField('teléfono', max_length=20, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    is_habil = models.BooleanField('horario hábil')
-    created = models.DateTimeField('creado', auto_now_add=True)
-    modified = models.DateTimeField('modificado', auto_now=True)
+    funcionario = models.CharField(_('funcionario'), max_length=200)
+    telefono = models.CharField(_('teléfono'), max_length=20, blank=True, null=True)
+    correo_electronico = models.EmailField(_('correo electrónico'), blank=True, null=True)
+    is_habil = models.BooleanField(_('horario hábil'))
+    created = models.DateTimeField(_('creado'), auto_now_add=True)
+    modified = models.DateTimeField(_('modificado'), auto_now=True)
 
     class Meta:
         """
@@ -338,8 +348,8 @@ class MesaAyuda(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'atención de mesa de ayuda'
-        verbose_name_plural = 'atenciones de mesa de ayuda'
+        verbose_name = _('atención de mesa de ayuda')
+        verbose_name_plural = _('atenciones de mesa de ayuda')
 
     def __str__(self):
         """
@@ -383,7 +393,7 @@ class TipoSoporte(models.Model):
         # Guardando cambios hechos
         tipo_soporte_elegido.save()
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -392,8 +402,8 @@ class TipoSoporte(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'tipo de soporte'
-        verbose_name_plural = 'tipos de soportes'
+        verbose_name = _('tipo de soporte')
+        verbose_name_plural = _('tipos de soportes')
 
     def __str__(self):
         """
@@ -443,7 +453,7 @@ class Modulo(models.Model):
         # Guardando cambios hechos
         modulo_elegido.save()
     """
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(_('nombre'), max_length=100)
     proyecto = models.ForeignKey('Proyecto', on_delete=models.CASCADE)
 
     class Meta:
@@ -452,7 +462,8 @@ class Modulo(models.Model):
 
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         """
-        verbose_name = 'módulo'
+        verbose_name = _('módulo')
+        verbose_name_plural = _('modulos')
 
     def __str__(self):
         """

@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class DatosFormacion(models.Model):
@@ -68,7 +69,7 @@ class DatosFormacion(models.Model):
         on_delete=models.CASCADE,
         verbose_name='estado de formación'
     )
-    fecha_termino = models.DateField('fecha de término')
+    fecha_termino = models.DateField(_('fecha de término'))
     institucion = models.ForeignKey('Institucion', on_delete=models.CASCADE, verbose_name='institución')
 
     class Meta:
@@ -78,8 +79,8 @@ class DatosFormacion(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'datos de formación'
-        verbose_name_plural = 'datos de formaciones'
+        verbose_name = _('datos de formación')
+        verbose_name_plural = _('datos de formaciones')
 
     def __str__(self):
         """
@@ -125,7 +126,7 @@ class TipoFormacion(models.Model):
         tipo_formacion_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -134,8 +135,8 @@ class TipoFormacion(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'tipo de formación'
-        verbose_name_plural = 'tipos de formación'
+        verbose_name = _('tipo de formación')
+        verbose_name_plural = _('tipos de formación')
 
     def __str__(self):
         """
@@ -181,7 +182,11 @@ class Carrera(models.Model):
         carrera_elegida.save()
 
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = _('carrera')
+        verbose_name_plural = _('carreras')
 
     def __str__(self):
         """
@@ -227,7 +232,7 @@ class EstadoFormacion(models.Model):
         estado_formacion_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -236,8 +241,8 @@ class EstadoFormacion(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'estado de formación'
-        verbose_name_plural = 'estados de formación'
+        verbose_name = _('estado de formación')
+        verbose_name_plural = _('estados de formación')
 
     def __str__(self):
         """
@@ -295,7 +300,7 @@ class Institucion(models.Model):
         on_delete=models.CASCADE,
         verbose_name='tipo de institución'
     )
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=100, unique=True)
 
     class Meta:
         """
@@ -304,8 +309,8 @@ class Institucion(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'institución'
-        verbose_name_plural = 'instituciones'
+        verbose_name = _('institución')
+        verbose_name_plural = _('instituciones')
 
     def __str__(self):
         """
@@ -351,7 +356,7 @@ class TipoInstitucion(models.Model):
         tipo_institucion_elegida.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -360,8 +365,8 @@ class TipoInstitucion(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'tipo de institución'
-        verbose_name_plural = 'tipos de instituciones'
+        verbose_name = _('tipo de institución')
+        verbose_name_plural = _('tipos de instituciones')
 
     def __str__(self):
         """
@@ -433,7 +438,7 @@ class OtroFormacion(models.Model):
         verbose_name='tipo otro de formación'
     )
     diploma = models.ForeignKey('Diploma', on_delete=models.CASCADE)
-    horas = models.DecimalField(max_digits=6, decimal_places=1, validators=[MinValueValidator(0.0)])
+    horas = models.DecimalField(_('horas'), max_digits=6, decimal_places=1, validators=[MinValueValidator(0.0)])
 
     class Meta:
         """
@@ -442,8 +447,8 @@ class OtroFormacion(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'datos de formación otros'
-        verbose_name_plural = 'datos de formaciones otros'
+        verbose_name = _('datos de formación otros')
+        verbose_name_plural = _('datos de formaciones otros')
 
     def __str__(self):
         """
@@ -489,7 +494,7 @@ class TipoOtroFormacion(models.Model):
         tipo_otro_formacion_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -498,8 +503,8 @@ class TipoOtroFormacion(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'tipo otro de formación'
-        verbose_name_plural = 'tipos otros de formación'
+        verbose_name = _('tipo otro de formación')
+        verbose_name_plural = _('tipos otros de formación')
 
     def __str__(self):
         """
@@ -544,7 +549,11 @@ class Diploma(models.Model):
         diploma_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
+
+    class Meta:
+        verbose_name = _('diploma')
+        verbose_name_plural = _('diplomas')
 
     def __str__(self):
         """

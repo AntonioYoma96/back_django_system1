@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-def get_image_ticket_path(instance, filename):
+def get_file_ticket_path(instance, filename):
     """
     Método que crea un path con la constante *ticket* y el id de este, y retorna el path para la imagen solicitada,
     cambiando el nombre a uno genérico.
@@ -18,7 +18,7 @@ def get_image_ticket_path(instance, filename):
     return new_filename(ticket_path, filename)
 
 
-def get_image_message_path(instance, filename):
+def get_file_message_path(instance, filename):
     """
     Método que crea un path con la constante *mensaje* y el id de este, y retorna el path para la imagen solicitada,
     cambiando el nombre a uno genérico.
@@ -41,7 +41,7 @@ def new_filename(base_path, file):
     :return: Cadena de texto con el path estandarizado
     """
     today = datetime.now()
-    root = 'image'
+    root = 'files'
     filename = '{year}_{month}_{day}_{secs}.{extension}'.format(
         year=today.year,
         month=today.month,
@@ -64,18 +64,19 @@ class Ticket(models.Model):
     )
     origen = models.ForeignKey('Origen', on_delete=models.CASCADE)
     modulo = models.ForeignKey('Modulo', on_delete=models.CASCADE, verbose_name='módulo')
-    version = models.CharField('versión', max_length=10, blank=True, null=True)
+    version = models.CharField(_('versión'), max_length=10, blank=True, null=True)
     prioridad = models.ForeignKey('Prioridad', on_delete=models.CASCADE)
     tipo_ticket = models.ForeignKey('TipoTicket', on_delete=models.CASCADE, verbose_name='tipo de ticket')
-    fecha_limite = models.DateField('fecha límite', blank=True, null=True)
+    fecha_limite = models.DateField(_('fecha límite'), blank=True, null=True)
     ruta = models.URLField(blank=True, null=True)
     asunto = models.CharField(max_length=100)
-    descripcion = models.TextField('descripción')
+    descripcion = models.TextField(_('descripción'))
     etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='etapa del ticket')
     dificultad_ticket = models.ForeignKey('DificultadTicket', on_delete=models.CASCADE,
                                           verbose_name='dificultad del ticket', blank=True, null=True)
-    created = models.DateTimeField('creado', auto_now_add=True)
-    modified = models.DateTimeField('modificado', auto_now=True)
+    fecha_solicitud = models.DateTimeField(_('fecha de solicitud'), default=datetime.now)
+    created = models.DateTimeField(_('creado'), auto_now_add=True)
+    modified = models.DateTimeField(_('modificado'), auto_now=True)
 
     def __str__(self):
         return f'{self.id} - {self.asunto[:50]} - {self.etapa_ticket.nombre}'
@@ -83,23 +84,19 @@ class Ticket(models.Model):
 
 class TicketLog(models.Model):
     ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE)
-    asignado = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='ticket_log_asignado')
-    etapa_ticket = models.ForeignKey('EtapaTicket', on_delete=models.CASCADE, verbose_name='etapa del ticket')
-    dificultad_ticket = models.ForeignKey('DificultadTicket', on_delete=models.CASCADE,
-                                          verbose_name='dificultad del ticket')
-    inicio_area = models.DateTimeField('inicio de etapa', auto_now_add=True)
-    fin_area = models.DateTimeField('fin de etapa')
+    historial = models.JSONField(_('historial'), default=dict)
+    responsable = models.ForeignKey('Colaborador', on_delete=models.CASCADE)
+    observaciones = models.TextField(_('observaciones'), blank=True, null=True)
+    fecha_modificacion = models.DateTimeField(_('fecha de modificación'), auto_now_add=True)
 
     class Meta:
-        verbose_name = 'historial del ticket'
-        verbose_name_plural = 'historiales de los tickets'
+        verbose_name = _('historial del ticket')
+        verbose_name_plural = _('historiales de los tickets')
 
     def __str__(self):
-        return 'Ticket {} - {} - {}{}'.format(
+        return 'Ticket {} - Fecha de cambio {}'.format(
             self.ticket.id,
-            self.etapa_ticket.nombre,
-            self.inicio_area,
-            f' - {self.fin_area}' if self.fin_area else ''
+            self.fecha_modificacion
         )
 
 
@@ -138,8 +135,8 @@ class Prioridad(models.Model):
         prioridad_elegida.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
-    valor = models.SmallIntegerField(unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
+    valor = models.SmallIntegerField(_('valor'), unique=True)
 
     class Meta:
         """
@@ -147,7 +144,8 @@ class Prioridad(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'prioridades'
+        verbose_name = _('prioridad')
+        verbose_name_plural = _('prioridades')
 
     def __str__(self):
         """
@@ -192,7 +190,7 @@ class TipoTicket(models.Model):
         tipo_ticket_elegido.save()
 
     """
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(_('nombre'), max_length=100)
 
     class Meta:
         """
@@ -201,8 +199,8 @@ class TipoTicket(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'tipo de ticket'
-        verbose_name_plural = 'tipos de ticket'
+        verbose_name = _('tipo de ticket')
+        verbose_name_plural = _('tipos de ticket')
 
     def __str__(self):
         """
@@ -215,39 +213,39 @@ class TipoTicket(models.Model):
 
 
 class EtapaTicket(models.Model):
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
-        verbose_name = 'etapa del ticket'
-        verbose_name_plural = 'etapa de los tickets'
+        verbose_name = _('etapa del ticket')
+        verbose_name_plural = _('etapa de los tickets')
 
     def __str__(self):
         return self.nombre
 
 
 class AreaTicket(models.Model):
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
-        verbose_name = 'área del ticket'
-        verbose_name_plural = 'áreas de los tickets'
+        verbose_name = _('área del ticket')
+        verbose_name_plural = _('áreas de los tickets')
 
     def __str__(self):
         return self.nombre
 
 
 class DificultadTicket(models.Model):
-    tipo = models.CharField(max_length=50)
-    nivel = models.CharField(max_length=50, blank=True, null=True)
-    rev_min = models.FloatField('tiempo mínimo de revisión', blank=True, null=True)
-    rev_max = models.FloatField('tiempo máximo de revisión', blank=True, null=True)
-    dev_min = models.FloatField('tiempo mínimo de desarrollo', blank=True, null=True)
-    dev_max = models.FloatField('tiempo máximo de desarrollo', blank=True, null=True)
+    tipo = models.CharField(_('tipo'), max_length=50)
+    nivel = models.CharField(_('nivel'), max_length=50, blank=True, null=True)
+    rev_min = models.FloatField(_('tiempo mínimo de revisión'), blank=True, null=True)
+    rev_max = models.FloatField(_('tiempo máximo de revisión'), blank=True, null=True)
+    dev_min = models.FloatField(_('tiempo mínimo de desarrollo'), blank=True, null=True)
+    dev_max = models.FloatField(_('tiempo máximo de desarrollo'), blank=True, null=True)
     area_ticket = models.ForeignKey('AreaTicket', on_delete=models.CASCADE, verbose_name='área del ticket')
 
     class Meta:
-        verbose_name = 'dificultad de ticket'
-        verbose_name_plural = 'dificultades de los tickets'
+        verbose_name = _('dificultad de ticket')
+        verbose_name_plural = _('dificultades de los tickets')
 
     def __str__(self):
         return '{} - {}{}'.format(
@@ -264,197 +262,55 @@ class DificultadTicket(models.Model):
         )
 
 
-class ImagenTicket(models.Model):
-    """
-    El modelo ImagenTicket es una representación que conserva las imágenes adjuntas al modelo :class:`Ticket`.
-
-    :param ticket: Clave foránea al modelo :class:`Ticket`.
-    :param imagen: Campo especial para el guardado de imágenes. Incluye el detalle de usar el método
-        :func:`get_image_ticket_path` para generar la ruta al archivo guardado.
-
-    **Ejemplos de uso**
-
-    Para su creación se necesita del campo :class:`Ticket` con entradas y se usan los siguientes pasos:
-
-    *Creación de ImagenTicket*
-
-    Ejemplo:
-    ::
-        # Valores de claves foráneas
-        ticket_elegido = Ticket.objects.get(pk=1)
-
-        # Creación de la nueva ImagenTicket
-        nuevo_imagen_ticket = ImagenTicket.objects.create(
-            ticket=ticket_elegido,
-            imagen='pantalla1.jpg'
-        )
-
-    *Actualización del modelo ImagenTicket*
-
-    Ejemplo:
-    ::
-        # Obtener ImagenTicket existente
-        imagen_ticket_elegida = ImagenTicket.objects.get(pk=1)
-
-        # Generar cambios a la imagen de ticket obtenida
-        imagen_ticket_elegida.imagen = 'pantalla2.jpg'
-
-        # Guardando cambios hechos
-        imagen_ticket_elegida.save()
-
-    """
+class ArchivoTicket(models.Model):
     ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to=get_image_ticket_path)
+    archivo = models.FileField(_('archivo'), upload_to=get_file_ticket_path)
 
     class Meta:
-        """
-        Clase meta encargada de la información general para el funcionamiento en Django.
-
-        :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
-        :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
-        """
-        verbose_name = 'imagen del ticket'
-        verbose_name_plural = 'imágenes de los tickets'
+        verbose_name = _('archivo del ticket')
+        verbose_name_plural = _('archivos de los tickets')
 
     def __str__(self):
-        """
-        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
-        funciones de Django.
-
-        :return: Cadena de texto con el ID y asunto del ticket, y la ruta de la imagen del ticket.
-        """
         return f'{self.ticket.id} - {self.ticket.asunto[:50]} - {self.slice_path()}'
 
     def slice_path(self):
         return '..{}{}'.format(
-            '\\' if self.imagen[-50:][0] != '\\' else '',
-            self.imagen[-50:]
+            '\\' if self.archivo[-50:][0] != '\\' else '',
+            self.archivo[-50:]
         )
 
 
 class Mensaje(models.Model):
-    """
-    El modelo Mensaje es una representación de los mensajes que se asocian al :class:`Ticket`.
-
-    :param ticket: Clave foránea al modelo :class:`Ticket`.
-    :param asunto: Campo de texto con el asunto del mensaje (largo máximo: 100 caracteres).
-    :param descripcion: Campo de texto con la descripción del mensaje.
-    :param created: Campo de fecha y hora de la fecha de creación del colaborador (Auto generado).
-    :param modified: Campo de fecha y hora de la última fecha de modificación del colaborador (Auto generado).
-
-    **Ejemplos de uso**
-
-    Para su creación se necesita del campo :class:`Ticket` con entradas y se usan los siguientes pasos:
-
-    *Creación de Mensaje*
-
-    Ejemplo:
-    ::
-        # Valores de claves foráneas
-        ticket_elegido = Ticket.objects.get(pk=1)
-
-        # Creación de la nueva Mensaje
-        nuevo_mensaje = Mensaje.objects.create(
-            ticket=ticket_elegido,
-            asunto='Falta información'
-            descripcion='Por favor llenar el error reportado'
-        )
-
-    *Actualización del modelo Mensaje*
-
-    Ejemplo:
-    ::
-        # Obtener Mensaje existente
-        mensaje_elegido = Mensaje.objects.get(pk=1)
-
-        # Generar cambios al mensaje obtenido
-        mensaje_elegido.asunto = 'Falta completar'
-
-        # Guardando cambios hechos
-        mensaje_elegido.save()
-
-    """
     ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE)
-    asunto = models.CharField(max_length=100)
-    descripcion = models.TextField('descripción')
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    asunto = models.CharField(_('asunto'), max_length=100)
+    descripcion = models.TextField(_('descripción'))
+    autor = models.ForeignKey('Colaborador', models.CASCADE)
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    modified = models.DateTimeField(_('modified'), auto_now=True)
+
+    class Meta:
+        verbose_name = _('mensaje')
+        verbose_name_plural = _('mensajes')
 
     def __str__(self):
-        """
-        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
-        funciones de Django.
-
-        :return: Cadena de texto con el ID del ticket y el asunto del mensaje.
-        """
         return f'Ticket: {self.ticket.id} - Mensaje: {self.asunto}'
 
 
-class ImagenMensaje(models.Model):
-    """
-    El modelo ImagenMensaje es una representación que conserva las imágenes adjuntas al modelo :class:`Mensaje`.
-
-    :param mensaje: Clave foránea al modelo :class:`Mensaje`.
-    :param imagen: Campo especial para el guardado de imágenes. Incluye el detalle de usar el método
-        :func:`get_image_message_path` para generar la ruta al archivo guardado.
-
-    **Ejemplos de uso**
-
-    Para su creación se necesita del campo :class:`Mensaje` con entradas y se usan los siguientes pasos:
-
-    *Creación de ImagenMensaje*
-
-    Ejemplo:
-    ::
-        # Valores de claves foráneas
-        mensaje_elegido = Mensaje.objects.get(pk=1)
-
-        # Creación de la nueva ImagenMensaje
-        nuevo_imagen_mensaje = ImagenMensaje.objects.create(
-            mensaje=mensaje_elegido,
-            imagen='pantalla1.jpg'
-        )
-
-    *Actualización del modelo ImagenMensaje*
-
-    Ejemplo:
-    ::
-        # Obtener ImagenMensaje existente
-        imagen_mensaje_elegida = ImagenMensaje.objects.get(pk=1)
-
-        # Generar cambios a la imagen del mensaje obtenida
-        imagen_mensaje_elegida.imagen = 'pantalla2.jpg'
-
-        # Guardando cambios hechos
-        imagen_mensaje_elegida.save()
-
-    """
+class ArchivoMensaje(models.Model):
     mensaje = models.ForeignKey('Mensaje', on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to=get_image_message_path)
+    archivo = models.ImageField(_('archivo'), upload_to=get_file_message_path)
 
     class Meta:
-        """
-        Clase meta encargada de la información general para el funcionamiento en Django.
-
-        :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
-        :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
-        """
-        verbose_name = 'imagen del mensaje'
-        verbose_name_plural = 'imágenes de los mensajes'
+        verbose_name = _('archivo del mensaje')
+        verbose_name_plural = _('archivos de los mensajes')
 
     def __str__(self):
-        """
-        Función que retorna una representación visual en cadena de texto para la llamada del modelo por algunas.
-        funciones de Django.
-
-        :return: Cadena de texto con ID y asunto del mensaje, y la ruta de la imagen del mensaje.
-        """
         return f'{self.mensaje.id} - {self.mensaje.asunto[:50]} - {self.slice_path()}'
 
     def slice_path(self):
         return '..{}{}'.format(
-            '\\' if self.imagen[-50:][0] != '\\' else '',
-            self.imagen[-50:]
+            '\\' if self.archivo[-50:][0] != '\\' else '',
+            self.archivo[-50:]
         )
 
 
@@ -507,10 +363,15 @@ class Etiqueta(models.Model):
         WARNING = 'warning', _('Precaución')
         DANGER = 'danger', _('Peligro')
 
-    nombre = models.CharField(max_length=50, unique=True)
-    nivel_severidad = models.CharField(max_length=50, choices=NivelSeveridad.choices, default=NivelSeveridad.INFO)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
+    nivel_severidad = models.CharField(_('nivel_severidad'), max_length=50, choices=NivelSeveridad.choices,
+                                       default=NivelSeveridad.INFO)
     tickets = models.ManyToManyField('Ticket', blank=True)
     mensajes = models.ManyToManyField('Mensaje', blank=True)
+
+    class Meta:
+        verbose_name = _('etiqueta')
+        verbose_name_plural = _('etiquetas')
 
     def __str__(self):
         """
@@ -556,7 +417,7 @@ class Origen(models.Model):
         origen_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -564,7 +425,8 @@ class Origen(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'orígenes'
+        verbose_name = _('origen')
+        verbose_name_plural = _('orígenes')
 
     def __str__(self):
         """

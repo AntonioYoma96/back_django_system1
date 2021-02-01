@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class DatosOrganizacionales(models.Model):
@@ -85,7 +86,8 @@ class DatosOrganizacionales(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'datos organizacionales'
+        verbose_name = _('datos organizacionales')
+        verbose_name_plural = _('datos organizacionales')
 
     def __str__(self):
         """
@@ -135,7 +137,11 @@ class Cargo(models.Model):
         cargo_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
+
+    class Meta:
+        verbose_name = _('cargo')
+        verbose_name_plural = _('cargos')
 
     def __str__(self):
         """
@@ -188,7 +194,7 @@ class Unidad(models.Model):
         unidad_elegido.save()
 
     """
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(_('nombre'), max_length=100)
     area_funcional = models.ForeignKey('AreaFuncional', on_delete=models.CASCADE, verbose_name='área funcional')
 
     class Meta:
@@ -199,7 +205,8 @@ class Unidad(models.Model):
         :param constraints: Lista de restricciones de clase :class:`django.models.UniqueConstraint` para restricciones
             del modelo.
         """
-        verbose_name_plural = 'unidades'
+        verbose_name = _('unidad')
+        verbose_name_plural = _('unidades')
         constraints = [
             models.UniqueConstraint(fields=['nombre', 'area_funcional'], name='unique_unidad_area_funcional')
         ]
@@ -248,7 +255,7 @@ class AreaFuncional(models.Model):
         area_funcional_elegida.save()
 
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=100, unique=True)
 
     class Meta:
         """
@@ -257,8 +264,8 @@ class AreaFuncional(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'área funcional'
-        verbose_name_plural = 'áreas funcionales'
+        verbose_name = _('área funcional')
+        verbose_name_plural = _('áreas funcionales')
 
     def __str__(self):
         """
@@ -304,7 +311,7 @@ class NivelResponsabilidad(models.Model):
         nivel_responsabilidad_elegido.save()
 
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=100, unique=True)
 
     class Meta:
         """
@@ -313,8 +320,8 @@ class NivelResponsabilidad(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'nivel de responsabilidad'
-        verbose_name_plural = 'niveles de responsabilidad'
+        verbose_name = _('nivel de responsabilidad')
+        verbose_name_plural = _('niveles de responsabilidad')
 
     def __str__(self):
         """
@@ -360,7 +367,7 @@ class CentroCosto(models.Model):
         centro_costo_elegido.save()
 
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=100, unique=True)
 
     class Meta:
         """
@@ -369,8 +376,8 @@ class CentroCosto(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'centro de costo'
-        verbose_name_plural = 'centros de costos'
+        verbose_name = _('centro de costo')
+        verbose_name_plural = _('centros de costos')
 
     def __str__(self):
         """

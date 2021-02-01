@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from api.validators import validate_run
 
@@ -82,23 +83,23 @@ class Colaborador(models.Model):
     """
     usuario = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     run = models.CharField('RUN', max_length=11, unique=True, validators=[validate_run])
-    nombre = models.CharField(max_length=50)
-    segundo_nombre = models.CharField(max_length=50, blank=True, null=True)
-    apellido_paterno = models.CharField(max_length=50)
-    apellido_materno = models.CharField(max_length=50)
-    fecha_nacimiento = models.DateField('fecha de nacimiento')
-    fecha_defuncion = models.DateField('fecha de defunción', blank=True, null=True)
+    nombre = models.CharField(_('nombre'), max_length=50)
+    segundo_nombre = models.CharField(_('segundo nombre'), max_length=50, blank=True, null=True)
+    apellido_paterno = models.CharField(_('apellido paterno'), max_length=50)
+    apellido_materno = models.CharField(_('apellido materno'), max_length=50)
+    fecha_nacimiento = models.DateField(_('fecha de nacimiento'))
+    fecha_defuncion = models.DateField(_('fecha de defunción'), blank=True, null=True)
     sexo = models.ForeignKey('Sexo', on_delete=models.CASCADE)
     estado_civil = models.ForeignKey('EstadoCivil', on_delete=models.CASCADE)
     nacionalidad = models.ForeignKey('Nacionalidad', on_delete=models.CASCADE, default=1)
-    direccion = models.CharField('dirección', max_length=200, blank=True, null=True)
+    direccion = models.CharField(_('dirección'), max_length=200, blank=True, null=True)
     comuna = models.ForeignKey('Comuna', on_delete=models.CASCADE)
-    telefono_fijo = models.CharField('teléfono fijo', max_length=20, blank=True, null=True)
-    telefono_movil = models.CharField('teléfono móvil', max_length=20, blank=True, null=True)
-    email_personal = models.EmailField()
-    fecha_ingreso = models.DateField('fecha de ingreso')
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    telefono_fijo = models.CharField(_('teléfono fijo'), max_length=20, blank=True, null=True)
+    telefono_movil = models.CharField(_('teléfono móvil'), max_length=20, blank=True, null=True)
+    correo_personal = models.EmailField(_('correo personal'), default='')
+    fecha_ingreso = models.DateField(_('fecha de ingreso'))
+    created = models.DateTimeField(_('creado'), auto_now_add=True)
+    modified = models.DateTimeField(_('modificado'), auto_now=True)
 
     class Meta:
         """
@@ -106,7 +107,8 @@ class Colaborador(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'colaboradores'
+        verbose_name = _('colaborador')
+        verbose_name_plural = _('colaboradores')
 
     def __str__(self):
         """
@@ -164,7 +166,11 @@ class Sexo(models.Model):
         # Se guarda el nuevo valor
         sexo.save()
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
+
+    class Meta:
+        verbose_name = _('sexo')
+        verbose_name_plural = _('sexos')
 
     def __str__(self):
         """
@@ -203,7 +209,7 @@ class EstadoCivil(models.Model):
         # Se guarda el nuevo valor
         estado_civil.save()
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -211,7 +217,8 @@ class EstadoCivil(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'estados civiles'
+        verbose_name = _('estado civil')
+        verbose_name_plural = _('estados civiles')
 
     def __str__(self):
         """
@@ -250,7 +257,7 @@ class Nacionalidad(models.Model):
         # Se guarda el nuevo valor
         nacionalidad.save()
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -260,7 +267,8 @@ class Nacionalidad(models.Model):
         
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'nacionalidades'
+        verbose_name = _('nacionalidad')
+        verbose_name_plural = _('nacionalidades')
 
     def __str__(self):
         """
@@ -312,9 +320,13 @@ class Comuna(models.Model):
         # Se guarda el nuevo valor
         comuna.save()
     """
-    codigo = models.CharField('código', max_length=5, unique=True)
-    nombre = models.CharField(max_length=50, unique=True)
+    codigo = models.CharField(_('código'), max_length=5, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
     provincia = models.ForeignKey('Provincia', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('comuna')
+        verbose_name_plural = _('comunas')
 
     def __str__(self):
         """
@@ -366,9 +378,13 @@ class Provincia(models.Model):
         # Se guarda el nuevo valor
         provincia.save()
     """
-    codigo = models.CharField('código', max_length=5, unique=True)
-    nombre = models.CharField(max_length=50, unique=True)
+    codigo = models.CharField(_('código'), max_length=5, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
     region = models.ForeignKey('Region', on_delete=models.CASCADE, verbose_name='región')
+
+    class Meta:
+        verbose_name = _('provincia')
+        verbose_name_plural = _('provincias')
 
     def __str__(self):
         """
@@ -413,8 +429,8 @@ class Region(models.Model):
         # Se guarda el nuevo valor
         region.save()
     """
-    codigo = models.CharField('código', max_length=5, unique=True)
-    nombre = models.CharField(max_length=50, unique=True)
+    codigo = models.CharField(_('código'), max_length=5, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -423,8 +439,8 @@ class Region(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'región'
-        verbose_name_plural = 'regiones'
+        verbose_name = _('región')
+        verbose_name_plural = _('regiones')
 
     def __str__(self):
         """
@@ -483,11 +499,15 @@ class Hijo(models.Model):
         hijo.save()
     """
     colaborador = models.ForeignKey('Colaborador', on_delete=models.CASCADE)
-    nombres = models.CharField(max_length=100)
-    apellido_paterno = models.CharField(max_length=100)
-    apellido_materno = models.CharField(max_length=100, blank=True, null=False)
+    nombres = models.CharField(_('nombres'), max_length=100)
+    apellido_paterno = models.CharField(_('apellido paterno'), max_length=100)
+    apellido_materno = models.CharField(_('apellido materno'), max_length=100, blank=True, null=False)
     run = models.CharField('RUN', max_length=11, blank=True, null=True, unique=True, validators=[validate_run])
-    fecha_nacimiento = models.DateField('fecha de nacimiento')
+    fecha_nacimiento = models.DateField(_('fecha de nacimiento'))
+
+    class Meta:
+        verbose_name = _('hijo')
+        verbose_name_plural = _('hijos')
 
     def __str__(self):
         """
@@ -543,10 +563,10 @@ class PersonaContacto(models.Model):
         contacto.save()
     """
     colaborador = models.ForeignKey('Colaborador', on_delete=models.CASCADE)
-    nombres = models.CharField(max_length=100)
-    apellido_paterno = models.CharField(max_length=100)
-    apellido_materno = models.CharField(max_length=100, blank=True, null=True)
-    telefono = models.CharField('teléfono', max_length=20)
+    nombres = models.CharField(_('nombres'), max_length=100)
+    apellido_paterno = models.CharField(_('apellido paterno'), max_length=100)
+    apellido_materno = models.CharField(_('apellido materno'), max_length=100, blank=True, null=True)
+    telefono = models.CharField(_('teléfono'), max_length=20)
 
     class Meta:
         """
@@ -554,8 +574,8 @@ class PersonaContacto(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto
         """
-        verbose_name = 'persona de contacto'
-        verbose_name_plural = 'personas de contacto'
+        verbose_name = _('persona de contacto')
+        verbose_name_plural = _('personas de contacto')
 
     def __str__(self):
         """
@@ -621,8 +641,8 @@ class ColaboradorSkill(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto
         """
-        verbose_name = 'skill del colaborador'
-        verbose_name_plural = 'skills del colaborador'
+        verbose_name = _('skill del colaborador')
+        verbose_name_plural = _('skills del colaborador')
 
     def __str__(self):
         """
@@ -668,7 +688,7 @@ class Skill(models.Model):
         # Se guarda el nuevo valor
         skill.save()
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     def __str__(self):
         """
@@ -710,7 +730,7 @@ class NivelSkill(models.Model):
         # Se guarda el nuevo valor
         nivel_skill.save()
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -719,8 +739,8 @@ class NivelSkill(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto
         """
-        verbose_name = 'nivel de skill'
-        verbose_name_plural = 'niveles de skills'
+        verbose_name = _('nivel de skill')
+        verbose_name_plural = _('niveles de skills')
 
     def __str__(self):
         """

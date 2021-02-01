@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class DatosContractuales(models.Model):
@@ -64,11 +65,11 @@ class DatosContractuales(models.Model):
 
     """
     colaborador = models.ForeignKey('Colaborador', on_delete=models.CASCADE)
-    fecha_inicio = models.DateField('fecha de inicio')
-    fecha_termino = models.DateField('fecha de termino', blank=True, null=True)
-    sueldo_base = models.PositiveIntegerField(blank=True, null=True)
+    fecha_inicio = models.DateField(_('fecha de inicio'))
+    fecha_termino = models.DateField(_('fecha de termino'), blank=True, null=True)
+    sueldo_base = models.PositiveIntegerField(_('sueldo base'), blank=True, null=True)
     tipo_contrato = models.ForeignKey('TipoContrato', on_delete=models.CASCADE, verbose_name='tipo de contrato')
-    fecha_vencimiento = models.DateField('fecha de vencimiento', blank=True, null=True)
+    fecha_vencimiento = models.DateField(_('fecha de vencimiento'), blank=True, null=True)
     prevision_afp = models.ForeignKey('PrevisionAfp', on_delete=models.CASCADE, verbose_name='previsión de AFP')
     prevision_salud = models.ForeignKey('PrevisionSalud', on_delete=models.CASCADE, verbose_name='previsión de salud')
     banco = models.ForeignKey('Banco', on_delete=models.CASCADE, blank=True, null=True)
@@ -78,7 +79,7 @@ class DatosContractuales(models.Model):
         verbose_name='tipo de cuenta',
         blank=True, null=True
     )
-    numero_cuenta = models.CharField('número de cuenta', max_length=20, blank=True, null=True)
+    numero_cuenta = models.CharField(_('número de cuenta'), max_length=20, blank=True, null=True)
 
     class Meta:
         """
@@ -86,7 +87,8 @@ class DatosContractuales(models.Model):
 
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name_plural = 'datos contractuales'
+        verbose_name = _('datos contractuales')
+        verbose_name_plural = _('datos contractuales')
 
     def __str__(self):
         """
@@ -138,7 +140,7 @@ class TipoContrato(models.Model):
         tipo_contrato_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -147,8 +149,8 @@ class TipoContrato(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'tipo de contrato'
-        verbose_name_plural = 'tipos de contrato'
+        verbose_name = _('tipo de contrato')
+        verbose_name_plural = _('tipos de contrato')
 
     def __str__(self):
         """
@@ -194,7 +196,7 @@ class PrevisionAfp(models.Model):
         prevision_afp_elegida.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -203,8 +205,8 @@ class PrevisionAfp(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'previsión de AFP'
-        verbose_name_plural = 'previsiones de AFP'
+        verbose_name = _('previsión de AFP')
+        verbose_name_plural = _('previsiones de AFP')
 
     def __str__(self):
         """
@@ -250,7 +252,7 @@ class PrevisionSalud(models.Model):
         prevision_salud_elegida.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -259,8 +261,8 @@ class PrevisionSalud(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'previsión de salud'
-        verbose_name_plural = 'previsiones de salud'
+        verbose_name = _('previsión de salud')
+        verbose_name_plural = _('previsiones de salud')
 
     def __str__(self):
         """
@@ -306,7 +308,11 @@ class Banco(models.Model):
         banco_elegido.save()
 
     """
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = _('banco')
+        verbose_name_plural = _('bancos')
 
     def __str__(self):
         """
@@ -352,7 +358,7 @@ class TipoCuenta(models.Model):
         tipo_cuenta_elegido.save()
 
     """
-    nombre = models.CharField(max_length=50, unique=True)
+    nombre = models.CharField(_('nombre'), max_length=50, unique=True)
 
     class Meta:
         """
@@ -361,8 +367,8 @@ class TipoCuenta(models.Model):
         :param verbose_name: Cadena de texto con la version singular del nombre del objeto.
         :param verbose_name_plural: Cadena de texto con la versión en plural del nombre del objeto.
         """
-        verbose_name = 'tipo de cuenta'
-        verbose_name_plural = 'tipos de cuenta'
+        verbose_name = _('tipo de cuenta')
+        verbose_name_plural = _('tipos de cuenta')
 
     def __str__(self):
         """
