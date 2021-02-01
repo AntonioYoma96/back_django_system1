@@ -278,5 +278,56 @@
     "fields": {
       "nombre": "Cuenta Corriente"
     }
+  },
+  {
+    "model": "api.datoscontractuales",
+    "pk": 1,
+    "fields": {
+      "colaborador": 1,
+      "fecha_inicio": "2020-06-01",
+      "fecha_termino": null,
+      "sueldo_base": null,
+      "tipo_contrato": 1,
+      "fecha_vencimiento": null,
+      "prevision_afp": 1,
+      "prevision_salud": 1,
+      "banco": null,
+      "tipo_cuenta": null,
+      "numero_cuenta": null
+    }
+  },
+  {
+    "model": "api.datoscontractuales",
+    "pk": 2,
+    "fields": {
+      "colaborador": 2,
+      "fecha_inicio": "2019-09-01",
+      "fecha_termino": null,
+      "sueldo_base": null,
+      "tipo_contrato": 1,
+      "fecha_vencimiento": null,
+      "prevision_afp": 3,
+      "prevision_salud": 4,
+      "banco": null,
+      "tipo_cuenta": null,
+      "numero_cuenta": null
+    }
+  },
+  {
+    "model": "api.datoscontractuales",
+    "pk": 3,
+    "fields": {
+      "colaborador": 3,
+      "fecha_inicio": "2020-03-01",
+      "fecha_termino": null,
+      "sueldo_base": null,
+      "tipo_contrato": 1,
+      "fecha_vencimiento": null,
+      "prevision_afp": 5,
+      "prevision_salud": 7,
+      "banco": null,
+      "tipo_cuenta": null,
+      "numero_cuenta": null
+    }
   }
 ]

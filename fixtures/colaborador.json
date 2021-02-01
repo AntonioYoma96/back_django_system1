@@ -432,5 +432,80 @@
     "fields": {
       "nombre": "Experto"
     }
+  },
+  {
+    "model": "api.colaborador",
+    "pk": 1,
+    "fields": {
+      "usuario": 1,
+      "run": "187346770",
+      "nombre": "Felipe",
+      "segundo_nombre": "Tomás",
+      "apellido_paterno": "Maldonado",
+      "apellido_materno": "Gallardo",
+      "fecha_nacimiento": "1994-04-27",
+      "fecha_defuncion": null,
+      "sexo": 1,
+      "estado_civil": 1,
+      "nacionalidad": 1,
+      "direccion": "Puerto Yungay #1118",
+      "comuna": 207,
+      "telefono_fijo": null,
+      "telefono_movil": "+56967169606",
+      "correo_personal": "ftmaldonadog@gmail.com",
+      "fecha_ingreso": "2021-01-29",
+      "created": "2021-01-29T18:00:25.122Z",
+      "modified": "2021-01-29T18:00:25.122Z"
+    }
+  },
+  {
+    "model": "api.colaborador",
+    "pk": 2,
+    "fields": {
+      "usuario": 4,
+      "run": "111111111",
+      "nombre": "Benjamin",
+      "segundo_nombre": null,
+      "apellido_paterno": "Salas",
+      "apellido_materno": "Soto",
+      "fecha_nacimiento": "1990-01-06",
+      "fecha_defuncion": null,
+      "sexo": 1,
+      "estado_civil": 1,
+      "nacionalidad": 1,
+      "direccion": null,
+      "comuna": 176,
+      "telefono_fijo": null,
+      "telefono_movil": null,
+      "correo_personal": "benjamin.salas@email.com",
+      "fecha_ingreso": "2021-01-29",
+      "created": "2021-01-29T18:03:48.385Z",
+      "modified": "2021-01-29T18:03:48.385Z"
+    }
+  },
+  {
+    "model": "api.colaborador",
+    "pk": 3,
+    "fields": {
+      "usuario": 2,
+      "run": "222222222",
+      "nombre": "Valentina",
+      "segundo_nombre": null,
+      "apellido_paterno": "Cáceres",
+      "apellido_materno": "Perez",
+      "fecha_nacimiento": "1997-08-12",
+      "fecha_defuncion": null,
+      "sexo": 2,
+      "estado_civil": 1,
+      "nacionalidad": 1,
+      "direccion": null,
+      "comuna": 324,
+      "telefono_fijo": null,
+      "telefono_movil": null,
+      "correo_personal": "valentina.caceres@email.com",
+      "fecha_ingreso": "2021-01-29",
+      "created": "2021-01-29T18:04:51.192Z",
+      "modified": "2021-01-29T18:04:51.192Z"
+    }
   }
 ]

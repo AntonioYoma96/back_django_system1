@@ -112,26 +112,19 @@
     "model": "api.areaticket",
     "pk": 1,
     "fields": {
-      "nombre": "Sin asignar"
+      "nombre": "Proyectos"
     }
   },
   {
     "model": "api.areaticket",
     "pk": 2,
     "fields": {
-      "nombre": "Proyectos"
-    }
-  },
-  {
-    "model": "api.areaticket",
-    "pk": 3,
-    "fields": {
       "nombre": "Desarrollo"
     }
   },
   {
     "model": "api.areaticket",
-    "pk": 4,
+    "pk": 3,
     "fields": {
       "nombre": "TI"
     }
@@ -146,7 +139,7 @@
       "rev_max": 0.5,
       "dev_min": 1.0,
       "dev_max": 4.0,
-      "area_ticket": 3
+      "area_ticket": 2
     }
   },
   {
@@ -159,7 +152,7 @@
       "rev_max": 1.5,
       "dev_min": 5.0,
       "dev_max": 12.0,
-      "area_ticket": 3
+      "area_ticket": 2
     }
   },
   {
@@ -172,7 +165,7 @@
       "rev_max": 2.0,
       "dev_min": 12.0,
       "dev_max": 30.0,
-      "area_ticket": 3
+      "area_ticket": 2
     }
   },
   {
@@ -185,7 +178,7 @@
       "rev_max": 5.0,
       "dev_min": 24.0,
       "dev_max": 60.0,
-      "area_ticket": 3
+      "area_ticket": 2
     }
   },
   {
@@ -227,6 +220,76 @@
     "pk": 3,
     "fields": {
       "nombre": "Cliente"
+    }
+  },
+  {
+    "model": "api.ticket",
+    "pk": 1,
+    "fields": {
+      "asignado": 1,
+      "solicitante": 2,
+      "validador": null,
+      "origen": 1,
+      "modulo": 1,
+      "version": null,
+      "prioridad": 1,
+      "tipo_ticket": 1,
+      "fecha_limite": null,
+      "ruta": null,
+      "asunto": "Prueba 1",
+      "descripcion": "Detalle 1",
+      "etapa_ticket": 1,
+      "dificultad_ticket": null,
+      "fecha_solicitud": "2021-01-29T18:23:19Z",
+      "created": "2021-01-29T18:23:24.526Z",
+      "modified": "2021-01-29T18:23:24.527Z"
+    }
+  },
+  {
+    "model": "api.ticket",
+    "pk": 2,
+    "fields": {
+      "asignado": 2,
+      "solicitante": 3,
+      "validador": null,
+      "origen": 2,
+      "modulo": 2,
+      "version": null,
+      "prioridad": 2,
+      "tipo_ticket": 4,
+      "fecha_limite": null,
+      "ruta": null,
+      "asunto": "Prueba 2",
+      "descripcion": "Detalle 2",
+      "etapa_ticket": 3,
+      "dificultad_ticket": null,
+      "fecha_solicitud": "2021-01-29T18:23:45Z",
+      "created": "2021-01-29T18:23:49.415Z",
+      "modified": "2021-01-29T18:23:49.415Z"
+    }
+  },
+  {
+    "model": "api.mensaje",
+    "pk": 1,
+    "fields": {
+      "ticket": 1,
+      "asunto": "Mensaje 1",
+      "descripcion": "Detalle 1",
+      "autor": 1,
+      "created": "2021-01-29T18:24:15.167Z",
+      "modified": "2021-01-29T18:24:15.167Z"
+    }
+  },
+  {
+    "model": "api.mensaje",
+    "pk": 2,
+    "fields": {
+      "ticket": 1,
+      "asunto": "Mensaje 2",
+      "descripcion": "Detalle 2",
+      "autor": 2,
+      "created": "2021-01-29T18:24:28.157Z",
+      "modified": "2021-01-29T18:24:28.158Z"
     }
   }
 ]

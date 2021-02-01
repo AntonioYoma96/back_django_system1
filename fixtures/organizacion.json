@@ -482,5 +482,41 @@
     "fields": {
       "nombre": "Hospital de Iquique"
     }
+  },
+  {
+    "model": "api.datosorganizacionales",
+    "pk": 1,
+    "fields": {
+      "datos_contractuales": 1,
+      "cargo": 22,
+      "unidad": 2,
+      "nivel_responsabilidad": 1,
+      "jefe_directo": null,
+      "centro_costo": 2
+    }
+  },
+  {
+    "model": "api.datosorganizacionales",
+    "pk": 2,
+    "fields": {
+      "datos_contractuales": 2,
+      "cargo": 31,
+      "unidad": 4,
+      "nivel_responsabilidad": 7,
+      "jefe_directo": null,
+      "centro_costo": 2
+    }
+  },
+  {
+    "model": "api.datosorganizacionales",
+    "pk": 3,
+    "fields": {
+      "datos_contractuales": 3,
+      "cargo": 30,
+      "unidad": 2,
+      "nivel_responsabilidad": 5,
+      "jefe_directo": null,
+      "centro_costo": 1
+    }
   }
 ]
