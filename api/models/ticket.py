@@ -27,7 +27,7 @@ def get_file_message_path(instance, filename):
     :param filename: Nombre del archivo a guardar
     :return: Cadena de texto con el path final para el guardado de imágenes
     """
-    ticket_path = f'mensaje_{instance.ticket.id}'
+    ticket_path = f'mensaje_{instance.mensaje.id}'
     return new_filename(ticket_path, filename)
 
 

@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 
@@ -58,8 +58,9 @@ class ArchivoTicketViewSet(viewsets.ModelViewSet):
 class MensajeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MensajeSerializer
     queryset = models.Mensaje.objects.all()
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['ticket']
+    ordering_fields = ['created']
 
     def create(self, request, *args, **kwargs):
         data = request.data

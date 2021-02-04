@@ -64,7 +64,7 @@ class DatosContractuales(models.Model):
         datos_contractuales_elegidos.save()
 
     """
-    colaborador = models.ForeignKey('Colaborador', on_delete=models.CASCADE)
+    colaborador = models.ForeignKey('Colaborador', on_delete=models.CASCADE, related_name='contrato')
     fecha_inicio = models.DateField(_('fecha de inicio'))
     fecha_termino = models.DateField(_('fecha de termino'), blank=True, null=True)
     sueldo_base = models.PositiveIntegerField(_('sueldo base'), blank=True, null=True)

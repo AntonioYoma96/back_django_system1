@@ -1,10 +1,40 @@
 from rest_framework import serializers
 
 from api import models
+from users.models import CustomUser
 
 
 class ColaboradorSerializer(serializers.ModelSerializer):
+    class LocalContratoSerializer(serializers.ModelSerializer):
+        class LocalOrganizacionSerializer(serializers.ModelSerializer):
+            class LocalCargoSerializer(serializers.ModelSerializer):
+                class Meta:
+                    model = models.Cargo
+                    fields = ["nombre"]
+
+            class Meta:
+                model = models.DatosOrganizacionales
+                fields = "__all__"
+
+            def to_representation(self, instance):
+                response = super().to_representation(instance)
+                response["cargo"] = self.LocalCargoSerializer(instance.cargo).data
+                return response
+
+        organizacion = serializers.PrimaryKeyRelatedField(read_only=True)
+
+        class Meta:
+            model = models.DatosContractuales
+            fields = "__all__"
+
+        def to_representation(self, instance):
+            response = super().to_representation(instance)
+            response['organizacion'] = self.LocalOrganizacionSerializer(instance.organizacion).data
+            return response
+
+    last_contrato = serializers.PrimaryKeyRelatedField(read_only=True)
     full_name = serializers.ReadOnlyField()
+    usuario = serializers.SlugRelatedField(queryset=CustomUser.objects.all(), slug_field='email')
 
     class Meta:
         model = models.Colaborador
@@ -29,8 +59,14 @@ class ColaboradorSerializer(serializers.ModelSerializer):
             "estado_civil",
             "nacionalidad",
             "comuna",
-            "full_name"
+            "full_name",
+            "last_contrato"
         ]
+
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response["last_contrato"] = self.LocalContratoSerializer(instance.last_contrato).data
+        return response
 
 
 class SexoSerializer(serializers.ModelSerializer):

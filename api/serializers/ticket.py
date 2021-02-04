@@ -106,7 +106,8 @@ class TicketSerializer(serializers.ModelSerializer):
         response = super().to_representation(instance)
         response['asignado'] = ColaboradorSerializer(instance.asignado).data
         response['solicitante'] = ColaboradorSerializer(instance.solicitante).data
-        response['validador'] = ColaboradorSerializer(instance.validador).data
+        if instance.validador:
+            response['validador'] = ColaboradorSerializer(instance.validador).data
         response['origen'] = OrigenSerializer(instance.origen).data
         response['modulo'] = ModuloSerializer(instance.modulo).data
         response['prioridad'] = PrioridadSerializer(instance.prioridad).data

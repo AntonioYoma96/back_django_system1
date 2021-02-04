@@ -59,7 +59,8 @@ class DatosOrganizacionales(models.Model):
         datos_organizacionales_elegidos.save()
 
     """
-    datos_contractuales = models.OneToOneField('DatosContractuales', on_delete=models.CASCADE)
+    datos_contractuales = models.OneToOneField('DatosContractuales', on_delete=models.CASCADE,
+                                               related_name='organizacion')
     cargo = models.ForeignKey('Cargo', on_delete=models.CASCADE)
     unidad = models.ForeignKey('Unidad', on_delete=models.CASCADE)
     nivel_responsabilidad = models.ForeignKey(

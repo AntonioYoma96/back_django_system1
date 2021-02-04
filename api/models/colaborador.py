@@ -130,13 +130,11 @@ class Colaborador(models.Model):
 
     @property
     def full_name(self):
-        """
-        Función que sirve para simplificar el llamado del :class:`Colaborador` con un formato más formal que lo
-        identifica.
-
-        :return: Cadena de texto con nombre, apellido paterno y apellido materno.
-        """
         return f'{self.nombre} {self.apellido_paterno} {self.apellido_materno}'
+
+    @property
+    def last_contrato(self):
+        return self.contrato.order_by("fecha_inicio").last()
 
 
 class Sexo(models.Model):
