@@ -1,5 +1,5 @@
-# SmartPeople 2.0 (Backend)
-Este repositorio contiene el backend para SmartPeople 2.0. Está basado en [Django](https://www.djangoproject.com/)
+# Backend
+Este repositorio contiene el backend. Está basado en [Django](https://www.djangoproject.com/)
 junto a su kit de herramientas [Django Rest Framework](https://www.django-rest-framework.org/). Además incorpora
 [Sphinx](https://www.sphinx-doc.org/en/master/) para la rápida generación de documentación.
 
